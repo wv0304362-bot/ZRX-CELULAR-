@@ -22,14 +22,13 @@
       background-color: var(--bg-dark); 
       color: var(--text-main); 
       padding: 15px; 
-      padding-bottom: 90px; /* Espaço para a barra inferior fixa */
+      padding-bottom: 90px; 
     }
 
     header { text-align: center; margin-bottom: 20px; }
     header h1 { font-size: 1.5rem; color: #fff; text-shadow: 0 0 10px rgba(255,0,85,0.4); }
     header p { color: var(--text-muted); font-size: 0.85rem; }
 
-    /* Seções (Abas) */
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
@@ -51,7 +50,7 @@
       gap: 8px;
     }
 
-    /* Carrossel de Categorias */
+    /* Carrossel */
     .carousel-container {
       display: flex;
       gap: 12px;
@@ -70,7 +69,7 @@
     .carousel-item h3 { font-size: 0.95rem; color: #fff; margin-bottom: 6px; }
     .carousel-item p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     
-    /* Formulários & Campos */
+    /* Formulários */
     .form-group { margin-bottom: 12px; }
     .form-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; }
     input, textarea, select {
@@ -86,7 +85,6 @@
     input:focus, textarea:focus { border-color: var(--accent-neon); }
     textarea { resize: vertical; min-height: 70px; }
 
-    /* Alternador Modo Manual/Auto */
     .mode-switch {
       display: flex;
       gap: 10px;
@@ -109,7 +107,6 @@
     }
     .mode-btn.active { background: var(--accent); color: #fff; }
 
-    /* Botões */
     .btn {
       width: 100%;
       padding: 10px;
@@ -130,7 +127,6 @@
       box-shadow: none;
     }
 
-    /* Painel Análise de Perfil */
     .status-badge {
       display: inline-block;
       padding: 6px 12px;
@@ -143,7 +139,7 @@
     .status-red { background: rgba(255, 0, 85, 0.15); color: #ff0055; border: 1px solid #ff0055; }
     .status-none { background: rgba(255,255,255,0.05); color: var(--text-muted); }
 
-    /* BARRA DE NAVEGAÇÃO INFERIOR (Estilo App Nativo com Ícones) */
+    /* Barra Inferior com Ícones */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -163,14 +159,14 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      font-size: 0.75rem;
+      font-size: 0.70rem;
       cursor: pointer;
       gap: 4px;
       flex: 1;
     }
     .nav-item svg {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       fill: currentColor;
     }
     .nav-item.active {
@@ -188,17 +184,23 @@
     <p>Gerenciador de Automação & Análise Inteligente</p>
   </header>
 
-  <!-- ABA 1: INÍCIO / CARROSSEL DE TEXTOS -->
-  <div id="tab-home" class="tab-content active">
+  <!-- ABA 1: TICKETS -->
+  <div id="tab-tickets" class="tab-content active">
     <div class="card">
-      <h2>📂 Categoria de Textos</h2>
-      <div class="carousel-container" id="carousel">
-        <!-- Renderizado via JS -->
-      </div>
+      <h2>🎫 Textos para Tickets</h2>
+      <div class="carousel-container" id="carouselTickets"></div>
     </div>
   </div>
 
-  <!-- ABA 2: ANÁLISE DE PERFIL INTELIGENTE -->
+  <!-- ABA 2: E-MAILS -->
+  <div id="tab-emails" class="tab-content">
+    <div class="card">
+      <h2>✉️ Textos para E-mail</h2>
+      <div class="carousel-container" id="carouselEmails"></div>
+    </div>
+  </div>
+
+  <!-- ABA 3: ANÁLISE DE PERFIL -->
   <div id="tab-analise" class="tab-content">
     <div class="card">
       <h2>🔍 Análise de Perfil Inteligente</h2>
@@ -213,13 +215,17 @@
     </div>
   </div>
 
-  <!-- ABA 3: ENVIO DE E-MAIL (MANUAL / AUTOMÁTICO) -->
-  <div id="tab-email" class="tab-content">
+  <!-- ABA 4: GERENCIADOR DE ENVIO (E-MAIL / AUTO) -->
+  <div id="tab-envio" class="tab-content">
     <div class="card">
-      <h2>✉️ Envio de E-mail</h2>
+      <h2>🚀 Central de Envio</h2>
 
       <div class="form-group">
-        <label>Seu ID Kwai (Injetado nas mensagens):</label>
+        <label>ID da Pessoa Denunciada (Alvo):</label>
+        <input type="text" id="idAlvo" placeholder="Ex: 987654321">
+      </div>
+      <div class="form-group">
+        <label>Seu ID Kwai (Denunciante):</label>
         <input type="text" id="meuId" placeholder="Ex: 15000987654">
       </div>
 
@@ -240,7 +246,7 @@
         </div>
         <div class="form-group">
           <label>Mensagem:</label>
-          <textarea id="mensagemManual" placeholder="Texto da denúncia..."></textarea>
+          <textarea id="mensagemManual" placeholder="Texto preenchido..."></textarea>
         </div>
         <button class="btn" onclick="enviarManual()">Enviar E-mail</button>
       </div>
@@ -249,7 +255,7 @@
       <div id="modoAuto" class="hidden">
         <div class="form-group">
           <label>Lista de E-mails Destino (um por linha):</label>
-          <textarea id="listaEmails" placeholder="exemplo1@kwai.com&#10;exemplo2@kwai.com"></textarea>
+          <textarea id="listaEmails" placeholder="suporte1@kwai.com&#10;suporte2@kwai.com"></textarea>
         </div>
         <div class="form-group">
           <label>Senhas de App carregadas (uma por linha):</label>
@@ -265,26 +271,83 @@
     </div>
   </div>
 
-  <!-- BARRA DE NAVEGAÇÃO INFERIOR COM ÍCONES -->
+  <!-- BARRA DE NAVEGAÇÃO INFERIOR -->
   <nav class="bottom-nav">
-    <button class="nav-item active" onclick="trocarAba('home', this)">
-      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-      Início
+    <button class="nav-item active" onclick="trocarAba('tickets', this)">
+      <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+      Tickets
+    </button>
+    <button class="nav-item" onclick="trocarAba('emails', this)">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      E-mails
     </button>
     <button class="nav-item" onclick="trocarAba('analise', this)">
       <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
       Análise
     </button>
-    <button class="nav-item" onclick="trocarAba('email', this)">
-      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      E-mail
+    <button class="nav-item" onclick="trocarAba('envio', this)">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      Envio
     </button>
   </nav>
 
   <script>
-    let bancoDados = { categorias: [] };
+    // Carregar dados dos arquivos separados do GitHub
+    async function carregarDados() {
+      try {
+        const resTickets = await fetch('tickets.json');
+        const dataTickets = await resTickets.json();
+        renderizarCarousel('carouselTickets', dataTickets, 'ticket');
 
-    // Alternar Abas da Barra Inferior
+        const resEmails = await fetch('emails.json');
+        const dataEmails = await resEmails.json();
+        renderizarCarousel('carouselEmails', dataEmails, 'email');
+      } catch (err) {
+        console.error("Erro ao carregar os arquivos JSON:", err);
+      }
+    }
+
+    function renderizarCarousel(elementId, banco, tipo) {
+      const container = document.getElementById(elementId);
+      container.innerHTML = '';
+
+      banco.categorias.forEach(cat => {
+        cat.itens.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'carousel-item';
+          div.innerHTML = `
+            <h3>${item.titulo}</h3>
+            <p>${item.mensagem}</p>
+            <button class="btn btn-secondary" onclick="usarTexto('${tipo}', \`${item.assunto || ''}\`, \`${item.mensagem}\`)">Usar no Envio</button>
+          `;
+          container.appendChild(div);
+        });
+      });
+    }
+
+    function usarTexto(tipo, assunto, mensagem) {
+      const idAlvo = document.getElementById('idAlvo').value || '[ID_ALVO]';
+      const meuId = document.getElementById('meuId').value || '[MEU_ID]';
+      
+      let msgFormatada = mensagem
+        .replace('{ID_ALVO}', idAlvo)
+        .replace('{MEU_ID}', meuId);
+
+      // Se for ticket, apenas adiciona o ID do alvo no final se já não estiver lá
+      if (tipo === 'ticket') {
+        msgFormatada += ' ' + idAlvo;
+        document.getElementById('assuntoManual').value = 'Denúncia via Ticket';
+      } else {
+        const assuntoFormatado = assunto.replace('{ID_ALVO}', idAlvo).replace('{MEU_ID}', meuId);
+        document.getElementById('assuntoManual').value = assuntoFormatado;
+      }
+
+      document.getElementById('mensagemManual').value = msgFormatada;
+
+      // Muda automaticamente para a aba de Envio (4ª opção da barra)
+      trocarAba('envio', document.querySelectorAll('.nav-item')[3]);
+    }
+
     function trocarAba(abaId, elementoBtn) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
@@ -293,48 +356,6 @@
       elementoBtn.classList.add('active');
     }
 
-    // Carregar JSON do GitHub
-    async function carregarConteudo() {
-      try {
-        const res = await fetch('conteudo.json');
-        bancoDados = await res.json();
-        renderizarCarrossel();
-      } catch (err) {
-        console.error("Erro ao carregar o arquivo conteudo.json:", err);
-      }
-    }
-
-    function renderizarCarrossel() {
-      const carousel = document.getElementById('carousel');
-      carousel.innerHTML = '';
-
-      bancoDados.categorias.forEach(cat => {
-        cat.itens.forEach(item => {
-          const div = document.createElement('div');
-          div.className = 'carousel-item';
-          div.innerHTML = `
-            <h3>${item.titulo}</h3>
-            <p>${item.mensagem}</p>
-            <button class="btn btn-secondary" onclick="usarTextoNoEmail('${item.assunto}', \`${item.mensagem}\`)">Usar no Envio</button>
-          `;
-          carousel.appendChild(div);
-        });
-      });
-    }
-
-    // Enviar texto direto para a aba de e-mail e alternar para ela
-    function usarTextoNoEmail(assunto, mensagem) {
-      const meuId = document.getElementById('meuId').value || '[ SEU ID AQUI ]';
-      const msgFormatada = mensagem.replace('{MEU_ID}', meuId);
-      
-      document.getElementById('assuntoManual').value = assunto;
-      document.getElementById('mensagemManual').value = msgFormatada;
-
-      // Troca automática para a aba de e-mail e aciona o botão correspondente na navbar
-      trocarAba('email', document.querySelectorAll('.nav-item')[2]);
-    }
-
-    // Modos Manual e Auto
     function mudarModo(modo) {
       if (modo === 'manual') {
         document.getElementById('modoManual').classList.remove('hidden');
@@ -354,7 +375,6 @@
       document.getElementById('senhaCounter').innerText = `Senhas de App detectadas: ${senhas.length}`;
     }
 
-    // Análise de Perfil Simulada
     function analisarPerfil() {
       const input = document.getElementById('mediaInput');
       const statusArea = document.getElementById('statusArea');
@@ -373,11 +393,11 @@
         if (isViolacao) {
           statusArea.className = 'status-badge status-red';
           statusArea.innerText = '🔴 Status Vermelho: Violação Detectada';
-          detail.innerText = 'Motivo: Suspeita de menor de idade ou descumprimento de termos gerais. Recomendado enviar denúncia.';
+          detail.innerText = 'Motivo: Suspeita de menor de idade ou descumprimento de termos.';
         } else {
           statusArea.className = 'status-badge status-green';
           statusArea.innerText = '🟢 Status Verde: Conta em Regularidade';
-          detail.innerText = 'Nenhuma violação grave detectada nos parâmetros visuais fornecidos.';
+          detail.innerText = 'Nenhuma violação grave detectada.';
         }
       }, 1500);
     }
@@ -387,15 +407,16 @@
     }
 
     function iniciarAutomacao() {
-      const id = document.getElementById('meuId').value;
-      if (!id) {
-        alert('Por favor, insira seu ID do Kwai antes de iniciar!');
+      const idAlvo = document.getElementById('idAlvo').value;
+      const meuId = document.getElementById('meuId').value;
+      if (!idAlvo || !meuId) {
+        alert('Por favor, preencha o ID da pessoa denunciada e o seu ID!');
         return;
       }
-      alert('Iniciando disparos automáticos alternando categorias!');
+      alert('Iniciando disparos automáticos!');
     }
 
-    window.onload = carregarConteudo;
+    window.onload = carregarDados;
   </script>
 </body>
 </html>
