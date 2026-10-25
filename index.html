@@ -1,127 +1,323 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Rastreamento - Find My Device</title>
-    <style>
-        :root {
-            background-color: #121212;
-            color: #e0e0e0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        .container {
-            width: 100%;
-            max-width: 400px;
-            background: #1e1e1e;
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-            text-align: center;
-        }
-        h2 {
-            color: #4285F4;
-            margin-bottom: 10px;
-        }
-        p {
-            font-size: 14px;
-            color: #aaa;
-            margin-bottom: 25px;
-        }
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 14px;
-            margin: 12px 0;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            text-decoration: none;
-            box-sizing: border-box;
-            transition: background 0.3s;
-        }
-        .btn-google {
-            background-color: #4285F4;
-            color: white;
-        }
-        .btn-google:hover {
-            background-color: #3367D6;
-        }
-        .btn-local {
-            background-color: #34A853;
-            color: white;
-        }
-        .btn-local:hover {
-            background-color: #2e8b57;
-        }
-        #info-localizacao {
-            margin-top: 20px;
-            font-size: 13px;
-            background: #2a2a2a;
-            padding: 10px;
-            border-radius: 6px;
-            display: none;
-            text-align: left;
-            word-break: break-all;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Métodos Kwai</title>
+  <style>
+    :root {
+      --bg-dark: #0b0f19;
+      --card-bg: #131b2e;
+      --accent: #ff0055;
+      --accent-neon: #00f0ff;
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: var(--bg-dark); color: var(--text-main); padding: 15px; }
+
+    header { text-align: center; margin-bottom: 25px; }
+    header h1 { font-size: 1.6rem; color: #fff; text-shadow: 0 0 10px var(--accent); }
+    header p { color: var(--text-muted); font-size: 0.9rem; }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      color: var(--accent-neon);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Carrossel de Categorias */
+    .carousel-container {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scroll-snap-type: x mandatory;
+    }
+    .carousel-item {
+      flex: 0 0 280px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 10px;
+      padding: 12px;
+      scroll-snap-align: start;
+    }
+    .carousel-item h3 { font-size: 0.95rem; color: #fff; margin-bottom: 6px; }
+    .carousel-item p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    
+    /* Formulários & Campos */
+    .form-group { margin-bottom: 12px; }
+    .form-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; }
+    input, textarea, select {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 10px;
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+    }
+    input:focus, textarea:focus { border-color: var(--accent-neon); }
+    textarea { resize: vertical; min-height: 70px; }
+
+    /* Alternador Modo Manual/Auto */
+    .mode-switch {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      background: rgba(0,0,0,0.3);
+      padding: 4px;
+      border-radius: 8px;
+    }
+    .mode-btn {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.85rem;
+    }
+    .mode-btn.active { background: var(--accent); color: #fff; }
+
+    /* Botões */
+    .btn {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--accent), #b3003b);
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.9rem;
+      box-shadow: 0 2px 10px rgba(255, 0, 85, 0.3);
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--accent-neon);
+      color: var(--accent-neon);
+      margin-top: 5px;
+      box-shadow: none;
+    }
+
+    /* Painel Análise de Perfil */
+    .status-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.8rem;
+      margin-top: 10px;
+    }
+    .status-green { background: rgba(0, 255, 136, 0.15); color: #00ff88; border: 1px solid #00ff88; }
+    .status-red { background: rgba(255, 0, 85, 0.15); color: #ff0055; border: 1px solid #ff0055; }
+    .status-none { background: rgba(255,255,255,0.05); color: var(--text-muted); }
+
+    .hidden { display: none; }
+    .counter { font-size: 0.75rem; color: var(--accent-neon); margin-top: 3px; }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <h2>Localizador Android</h2>
-        <p>Gerencie seus dispositivos conectados ou obtenha a posição atual deste aparelho.</p>
+  <header>
+    <h1>PAINEL DE MÉTODOS KWAI</h1>
+    <p>Gerenciador de Automação & Análise Inteligente</p>
+  </header>
 
-        <!-- Botão que redireciona para o Google Find My Device oficial -->
-        <a href="https://www.google.com/android/find/" target="_blank" class="btn btn-google">
-            Abrir Google Find My Device
-        </a>
+  <!-- 1. CARROSSEL DE TEXTOS POR CATEGORIA -->
+  <div class="card">
+    <h2>📂 Categoria de Textos</h2>
+    <div class="carousel-container" id="carousel">
+      <!-- Cards renderizados via JS a partir do conteudo.json -->
+    </div>
+  </div>
 
-        <!-- Botão para capturar coordenadas locais via API do navegador -->
-        <button class="btn btn-local" onclick="pegarLocalizacaoAtual()">
-            Ver Coordenadas Deste Aparelho
-        </button>
+  <!-- 2. ANÁLISE DE PERFIL INTELIGENTE -->
+  <div class="card">
+    <h2>🔍 Análise de Perfil Inteligente</h2>
+    <div class="form-group">
+      <label>Enviar Print/Mídia (Perfil, Mensagem ou Vídeo):</label>
+      <input type="file" id="mediaInput" accept="image/*">
+    </div>
+    <button class="btn" onclick="analisarPerfil()">Analisar Print</button>
+    
+    <div id="statusArea" class="status-badge status-none">Aguardando mídia para análise...</div>
+    <p id="analysisDetail" style="font-size: 0.8rem; margin-top: 8px; color: var(--text-muted);"></p>
+  </div>
 
-        <div id="info-localizacao"></div>
+  <!-- 3. ENVIO DE E-MAIL (MANUAL / AUTOMÁTICO) -->
+  <div class="card">
+    <h2>✉️ Envio de E-mail</h2>
+
+    <div class="form-group">
+      <label>Seu ID Kwai (Injetado nas mensagens):</label>
+      <input type="text" id="meuId" placeholder="Ex: 15000987654">
     </div>
 
-    <script>
-        function pegarLocalizacaoAtual() {
-            const box = document.getElementById("info-localizacao");
-            box.style.display = "block";
-            box.innerHTML = "Buscando localização via GPS...";
+    <div class="mode-switch">
+      <button class="mode-btn active" id="btnManual" onclick="mudarModo('manual')">Manual</button>
+      <button class="mode-btn" id="btnAuto" onclick="mudarModo('auto')">Automático</button>
+    </div>
 
-            if (!navigator.geolocation) {
-                box.innerHTML = "Erro: Geolocalização não é suportada pelo seu navegador.";
-                return;
-            }
+    <!-- MODO MANUAL -->
+    <div id="modoManual">
+      <div class="form-group">
+        <label>Para (E-mail destino):</label>
+        <input type="email" id="paraManual" placeholder="suporte@kwai.com">
+      </div>
+      <div class="form-group">
+        <label>Assunto:</label>
+        <input type="text" id="assuntoManual" placeholder="Assunto da mensagem">
+      </div>
+      <div class="form-group">
+        <label>Mensagem:</label>
+        <textarea id="mensagemManual" placeholder="Texto da denúncia..."></textarea>
+      </div>
+      <button class="btn" onclick="enviarManual()">Enviar E-mail</button>
+    </div>
 
-            navigator.geolocation.getCurrentPosition(
-                (pos) => {
-                    const lat = pos.coords.latitude;
-                    const lon = pos.coords.longitude;
-                    box.innerHTML = `<b>Latitude:</b> ${lat}<br>` +
-                                    `<b>Longitude:</b> ${lon}<br>` +
-                                    `<a href="https://maps.google.com/?q=${lat},${lon}" target="_blank" style="color: #8ab4f8; display:inline-block; margin-top:8px;">Abrir no Google Maps</a>`;
-                },
-                (err) => {
-                    box.innerHTML = "Erro ao obter localização. Verifique as permissões de GPS do navegador.";
-                },
-                { enableHighAccuracy: true, timeout: 10000 }
-            );
+    <!-- MODO AUTOMÁTICO -->
+    <div id="modoAuto" class="hidden">
+      <div class="form-group">
+        <label>Lista de E-mails Destino (um por linha):</label>
+        <textarea id="listaEmails" placeholder="exemplo1@kwai.com&#10;exemplo2@kwai.com"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Senhas de App carregadas (uma por linha):</label>
+        <textarea id="senhasApp" oninput="atualizarContadorSenhas()" placeholder="senha_app_1&#10;senha_app_2"></textarea>
+        <div class="counter" id="senhaCounter">Senhas de App detectadas: 0</div>
+      </div>
+      <div class="form-group">
+        <label>Quantidade de disparos:</label>
+        <input type="number" id="qtdEnviol" value="10">
+      </div>
+      <button class="btn" onclick="iniciarAutomacao()">Iniciar Automação</button>
+    </div>
+
+  </div>
+
+  <script>
+    let bancoDados = { categorias: [] };
+
+    // 1. Carregar JSON dinâmico do GitHub
+    async function carregarConteudo() {
+      try {
+        const res = await fetch('conteudo.json');
+        bancoDados = await res.json();
+        renderizarCarrossel();
+      } catch (err) {
+        console.error("Erro ao carregar o arquivo conteudo.json:", err);
+      }
+    }
+
+    function renderizarCarrossel() {
+      const carousel = document.getElementById('carousel');
+      carousel.innerHTML = '';
+
+      bancoDados.categorias.forEach(cat => {
+        cat.itens.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'carousel-item';
+          div.innerHTML = `
+            <h3>${item.titulo}</h3>
+            <p>${item.mensagem}</p>
+            <button class="btn btn-secondary" onclick="usarTexto('${item.assunto}', \`${item.mensagem}\`)">Usar no Envio</button>
+          `;
+          carousel.appendChild(div);
+        });
+      });
+    }
+
+    // 2. Colocar texto selecionado no formulário
+    function usarTexto(assunto, mensagem) {
+      const meuId = document.getElementById('meuId').value || '[ SEU ID AQUI ]';
+      const msgFormatada = mensagem.replace('{MEU_ID}', meuId);
+      
+      document.getElementById('assuntoManual').value = assunto;
+      document.getElementById('mensagemManual').value = msgFormatada;
+    }
+
+    // 3. Modos Manual e Auto
+    function mudarModo(modo) {
+      if (modo === 'manual') {
+        document.getElementById('modoManual').classList.remove('hidden');
+        document.getElementById('modoAuto').classList.add('hidden');
+        document.getElementById('btnManual').classList.add('active');
+        document.getElementById('btnAuto').classList.remove('active');
+      } else {
+        document.getElementById('modoManual').classList.add('hidden');
+        document.getElementById('modoAuto').classList.remove('hidden');
+        document.getElementById('btnManual').classList.remove('active');
+        document.getElementById('btnAuto').classList.add('active');
+      }
+    }
+
+    function atualizarContadorSenhas() {
+      const senhas = document.getElementById('senhasApp').value.trim().split('\n').filter(s => s !== '');
+      document.getElementById('senhaCounter').innerText = `Senhas de App detectadas: ${senhas.length}`;
+    }
+
+    // 4. Análise de Perfil Simulada
+    function analisarPerfil() {
+      const input = document.getElementById('mediaInput');
+      const statusArea = document.getElementById('statusArea');
+      const detail = document.getElementById('analysisDetail');
+
+      if (!input.files || input.files.length === 0) {
+        alert('Por favor, selecione uma foto ou print primeiro.');
+        return;
+      }
+
+      statusArea.className = 'status-badge status-none';
+      statusArea.innerText = 'Analisando imagem...';
+
+      setTimeout(() => {
+        // Exemplo de verificação simples de status
+        const isViolacao = Math.random() > 0.5; // Simulação de detecção
+        
+        if (isViolacao) {
+          statusArea.className = 'status-badge status-red';
+          statusArea.innerText = '🔴 Status Vermelho: Violação Detectada';
+          detail.innerText = 'Motivo: Suspeita de menor de idade ou descumprimento de termos gerais. Recomendado enviar denúncia usando a categoria "Idade Mínima".';
+        } else {
+          statusArea.className = 'status-badge status-green';
+          statusArea.innerText = '🟢 Status Verde: Conta em Regularidade';
+          detail.innerText = 'Nenhuma violação grave detectada nos parâmetros visuais fornecidos.';
         }
-    </script>
+      }, 1500);
+    }
 
+    function enviarManual() {
+      alert('Comando de envio manual acionado!');
+    }
+
+    function iniciarAutomacao() {
+      const id = document.getElementById('meuId').value;
+      if (!id) {
+        alert('Por favor, insira seu ID do Kwai antes de iniciar!');
+        return;
+      }
+      alert('Iniciando disparos automáticos alternando categorias!');
+    }
+
+    window.onload = carregarConteudo;
+  </script>
 </body>
 </html>
