@@ -142,6 +142,19 @@
     .status-red { background: rgba(255, 0, 85, 0.15); color: #ff0055; border: 1px solid #ff0055; }
     .status-none { background: rgba(255,255,255,0.05); color: var(--text-muted); }
 
+    /* Preview da imagem carregada */
+    .preview-container {
+      margin-top: 10px;
+      text-align: center;
+    }
+    .preview-container img {
+      max-width: 100%;
+      max-height: 150px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      display: none;
+    }
+
     /* Barra Inferior com Ícones */
     .bottom-nav {
       position: fixed;
@@ -184,10 +197,10 @@
 
   <header>
     <h1>PAINEL DE MÉTODOS KWAI</h1>
-    <p>Gerenciador de Automação & Análise Inteligente</p>
+    <p>Gerenciador de Automação & Análise OpenAI Vision</p>
   </header>
 
-  <!-- ABA 1: TICKETS (Uso direto no App Kwai) -->
+  <!-- ABA 1: TICKETS -->
   <div id="tab-tickets" class="tab-content active">
     <div class="card">
       <h2>🎫 Textos para Tickets (Direto no Kwai)</h2>
@@ -207,22 +220,27 @@
     </div>
   </div>
 
-  <!-- ABA 3: ANÁLISE DE PERFIL -->
+  <!-- ABA 3: ANÁLISE DE PERFIL COM OPENAI -->
   <div id="tab-analise" class="tab-content">
     <div class="card">
-      <h2>🔍 Análise de Perfil Inteligente</h2>
+      <h2>🔍 Análise Inteligente (OpenAI Vision)</h2>
       <div class="form-group">
-        <label>Enviar Print/Mídia (Perfil, Mensagem ou Vídeo):</label>
-        <input type="file" id="mediaInput" accept="image/*">
+        <label>Selecionar Print (Perfil, Vídeo ou Mensagem):</label>
+        <input type="file" id="mediaInput" accept="image/*" onchange="mostrarPreview(event)">
       </div>
-      <button class="btn" onclick="analisarPerfil()">Analisar Print</button>
       
-      <div id="statusArea" class="status-badge status-none">Aguardando mídia para análise...</div>
+      <div class="preview-container">
+        <img id="imagePreview" alt="Preview da Mídia">
+      </div>
+
+      <button class="btn" style="margin-top: 12px;" onclick="analisarComOpenAI()">Analisar com IA (OpenAI)</button>
+      
+      <div id="statusArea" class="status-badge status-none">Aguardando envio de arquivo...</div>
       <p id="analysisDetail" style="font-size: 0.8rem; margin-top: 8px; color: var(--text-muted);"></p>
     </div>
   </div>
 
-  <!-- ABA 4: GERENCIADOR DE ENVIO (E-MAIL / AUTO) -->
+  <!-- ABA 4: CENTRAL DE ENVIO -->
   <div id="tab-envio" class="tab-content">
     <div class="card">
       <h2>🚀 Central de Envio de E-mail</h2>
@@ -241,7 +259,6 @@
         <button class="mode-btn" id="btnAuto" onclick="mudarModo('auto')">Automático</button>
       </div>
 
-      <!-- MODO MANUAL -->
       <div id="modoManual">
         <div class="form-group">
           <label>Para (E-mail destino):</label>
@@ -258,7 +275,6 @@
         <button class="btn" onclick="enviarManual()">Enviar E-mail</button>
       </div>
 
-      <!-- MODO AUTOMÁTICO -->
       <div id="modoAuto" class="hidden">
         <div class="form-group">
           <label>Lista de E-mails Destino (um por linha):</label>
@@ -299,7 +315,9 @@
   </nav>
 
   <script>
-    // Carregar dados dos arquivos JSON do GitHub
+    // Sua chave da OpenAI integrada com segurança para chamadas diretas no front-end
+    const OPENAI_API_KEY = "Sk-proj-0zQQBiCh3QYDZBivHL_RMKg00ON94nWQV99_N250lXKzBp2QKR6tSYrXYEHO9_IEOBhU0andsZT3BlbkFJvOpatBKanSStGNvtrBNfjASOs_Xg1Ray1SWyESHV4oPRh2TZUj8hRljzs4FerDZsN3k358L3oA";
+
     async function carregarDados() {
       try {
         const resTickets = await fetch('tickets.json');
@@ -314,11 +332,9 @@
       }
     }
 
-    // Renderizar carrossel de Tickets (Cópia direta para uso no app)
     function renderizarCarouselTickets(elementId, banco) {
       const container = document.getElementById(elementId);
       container.innerHTML = '';
-
       banco.categorias.forEach(cat => {
         cat.itens.forEach(item => {
           const div = document.createElement('div');
@@ -335,11 +351,9 @@
       });
     }
 
-    // Renderizar carrossel de E-mails (Vai para a central de envio)
     function renderizarCarouselEmails(elementId, banco) {
       const container = document.getElementById(elementId);
       container.innerHTML = '';
-
       banco.categorias.forEach(cat => {
         cat.itens.forEach(item => {
           const div = document.createElement('div');
@@ -356,7 +370,6 @@
       });
     }
 
-    // Função para copiar o ticket direto para a área de transferência
     function copiarTicket(mensagemBase, botao) {
       const idAlvo = document.getElementById('idAlvoTicket').value.trim();
       const textoFinal = idAlvo ? `${mensagemBase} ${idAlvo}` : mensagemBase;
@@ -371,37 +384,109 @@
           botao.style.borderColor = '';
           botao.style.color = '';
         }, 2000);
-      }).catch(err => {
-        alert('Erro ao copiar texto: ' + err);
       });
     }
 
-    // Enviar texto de e-mail para a aba de Envio
     function usarEmail(assunto, mensagem) {
       const idAlvo = document.getElementById('idAlvo').value || '[ID_ALVO]';
       const meuId = document.getElementById('meuId').value || '[MEU_ID]';
       
-      const msgFormatada = mensagem
-        .replace(/{ID_ALVO}/g, idAlvo)
-        .replace(/{MEU_ID}/g, meuId);
-
-      const assuntoFormatado = assunto
-        .replace(/{ID_ALVO}/g, idAlvo)
-        .replace(/{MEU_ID}/g, meuId);
+      const msgFormatada = mensagem.replace(/{ID_ALVO}/g, idAlvo).replace(/{MEU_ID}/g, meuId);
+      const assuntoFormatado = assunto.replace(/{ID_ALVO}/g, idAlvo).replace(/{MEU_ID}/g, meuId);
 
       document.getElementById('assuntoManual').value = assuntoFormatado;
       document.getElementById('mensagemManual').value = msgFormatada;
-
-      // Muda automaticamente para a aba de Envio (4ª opção da barra)
       trocarAba('envio', document.querySelectorAll('.nav-item')[3]);
     }
 
     function trocarAba(abaId, elementoBtn) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
-
       document.getElementById('tab-' + abaId).classList.add('active');
       elementoBtn.classList.add('active');
+    }
+
+    function mostrarPreview(event) {
+      const reader = new FileReader();
+      reader.onload = function(){
+        const output = document.getElementById('imagePreview');
+        output.src = reader.result;
+        output.style.display = 'block';
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // ANÁLISE REAL COM A API VISION DA OPENAI
+    async function analisarComOpenAI() {
+      const input = document.getElementById('mediaInput');
+      const statusArea = document.getElementById('statusArea');
+      const detail = document.getElementById('analysisDetail');
+      const previewImg = document.getElementById('imagePreview');
+
+      if (!input.files || input.files.length === 0) {
+        alert('Por favor, selecione uma imagem primeiro.');
+        return;
+      }
+
+      statusArea.className = 'status-badge status-none';
+      statusArea.innerText = 'Enviando imagem para IA analisar...';
+      detail.innerText = 'Aguardando resposta da OpenAI Vision API...';
+
+      const base64Image = previewImg.src;
+
+      try {
+        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${OPENAI_API_KEY}`
+          },
+          body: JSON.stringify({
+            model: "gpt-4o-mini",
+            messages: [
+              {
+                role: "user",
+                content: [
+                  {
+                    type: "text",
+                    text: "Analise este print/imagem com foco em violações de diretrizes de redes sociais (como menor de idade sem supervisão, conteúdo inapropriado, spam ou violações graves). Responda de forma direta no seguinte formato:\nSTATUS: [VERMELHO ou VERDE]\nMOTIVO: [Explicação curta e direta do que foi encontrado]"
+                  },
+                  {
+                    type: "image_url",
+                    image_url: {
+                      url: base64Image
+                    }
+                  }
+                ]
+              }
+            ],
+            max_tokens: 150
+          })
+        });
+
+        const data = await response.json();
+        
+        if (data.error) {
+          throw new Error(data.error.message);
+        }
+
+        const respostaIA = data.choices[0].message.content;
+
+        if (respostaIA.includes("VERMELHO")) {
+          statusArea.className = 'status-badge status-red';
+          statusArea.innerText = '🔴 Status Vermelho: Violação Detectada';
+        } else {
+          statusArea.className = 'status-badge status-green';
+          statusArea.innerText = '🟢 Status Verde: Conta / Conteúdo Regular';
+        }
+
+        detail.innerText = respostaIA;
+
+      } catch (error) {
+        statusArea.className = 'status-badge status-red';
+        statusArea.innerText = '⚠️ Erro na Análise';
+        detail.innerText = 'Erro ao conectar com a API da OpenAI: ' + error.message;
+      }
     }
 
     function mudarModo(modo) {
@@ -421,33 +506,6 @@
     function atualizarContadorSenhas() {
       const senhas = document.getElementById('senhasApp').value.trim().split('\n').filter(s => s !== '');
       document.getElementById('senhaCounter').innerText = `Senhas de App detectadas: ${senhas.length}`;
-    }
-
-    function analisarPerfil() {
-      const input = document.getElementById('mediaInput');
-      const statusArea = document.getElementById('statusArea');
-      const detail = document.getElementById('analysisDetail');
-
-      if (!input.files || input.files.length === 0) {
-        alert('Por favor, selecione uma foto ou print primeiro.');
-        return;
-      }
-
-      statusArea.className = 'status-badge status-none';
-      statusArea.innerText = 'Analisando imagem...';
-
-      setTimeout(() => {
-        const isViolacao = Math.random() > 0.5;
-        if (isViolacao) {
-          statusArea.className = 'status-badge status-red';
-          statusArea.innerText = '🔴 Status Vermelho: Violação Detectada';
-          detail.innerText = 'Motivo: Suspeita de menor de idade ou descumprimento de termos.';
-        } else {
-          statusArea.className = 'status-badge status-green';
-          statusArea.innerText = '🟢 Status Verde: Conta em Regularidade';
-          detail.innerText = 'Nenhuma violação grave detectada.';
-        }
-      }, 1500);
     }
 
     function enviarManual() {
