@@ -1,0 +1,14 @@
+{
+  "categorias": [
+    {
+      "id": "tickets_idade",
+      "nome": "Denúncias de Idade",
+      "itens": [
+        {
+          "titulo": "Menor de 16 Anos",
+          "mensagem": "Denúncia: Este usuário aparenta ter menos de 16 anos e está usando a plataforma sem a supervisão necessária. Peço que verifiquem a idade e apliquem as diretrizes da comunidade. ID:"
+        }
+      ]
+    }
+  ]
+}
