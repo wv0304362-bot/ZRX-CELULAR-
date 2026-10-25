@@ -65,9 +65,12 @@
       border-radius: 10px;
       padding: 12px;
       scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .carousel-item h3 { font-size: 0.95rem; color: #fff; margin-bottom: 6px; }
-    .carousel-item p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .carousel-item p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; }
     
     /* Formulários */
     .form-group { margin-bottom: 12px; }
@@ -184,10 +187,14 @@
     <p>Gerenciador de Automação & Análise Inteligente</p>
   </header>
 
-  <!-- ABA 1: TICKETS -->
+  <!-- ABA 1: TICKETS (Uso direto no App Kwai) -->
   <div id="tab-tickets" class="tab-content active">
     <div class="card">
-      <h2>🎫 Textos para Tickets</h2>
+      <h2>🎫 Textos para Tickets (Direto no Kwai)</h2>
+      <div class="form-group" style="margin-bottom: 15px;">
+        <label>ID da Pessoa Denunciada (Opcional para incluir ao copiar):</label>
+        <input type="text" id="idAlvoTicket" placeholder="Ex: 987654321">
+      </div>
       <div class="carousel-container" id="carouselTickets"></div>
     </div>
   </div>
@@ -218,7 +225,7 @@
   <!-- ABA 4: GERENCIADOR DE ENVIO (E-MAIL / AUTO) -->
   <div id="tab-envio" class="tab-content">
     <div class="card">
-      <h2>🚀 Central de Envio</h2>
+      <h2>🚀 Central de Envio de E-mail</h2>
 
       <div class="form-group">
         <label>ID da Pessoa Denunciada (Alvo):</label>
@@ -292,22 +299,23 @@
   </nav>
 
   <script>
-    // Carregar dados dos arquivos separados do GitHub
+    // Carregar dados dos arquivos JSON do GitHub
     async function carregarDados() {
       try {
         const resTickets = await fetch('tickets.json');
         const dataTickets = await resTickets.json();
-        renderizarCarousel('carouselTickets', dataTickets, 'ticket');
+        renderizarCarouselTickets('carouselTickets', dataTickets);
 
         const resEmails = await fetch('emails.json');
         const dataEmails = await resEmails.json();
-        renderizarCarousel('carouselEmails', dataEmails, 'email');
+        renderizarCarouselEmails('carouselEmails', dataEmails);
       } catch (err) {
         console.error("Erro ao carregar os arquivos JSON:", err);
       }
     }
 
-    function renderizarCarousel(elementId, banco, tipo) {
+    // Renderizar carrossel de Tickets (Cópia direta para uso no app)
+    function renderizarCarouselTickets(elementId, banco) {
       const container = document.getElementById(elementId);
       container.innerHTML = '';
 
@@ -316,32 +324,72 @@
           const div = document.createElement('div');
           div.className = 'carousel-item';
           div.innerHTML = `
-            <h3>${item.titulo}</h3>
-            <p>${item.mensagem}</p>
-            <button class="btn btn-secondary" onclick="usarTexto('${tipo}', \`${item.assunto || ''}\`, \`${item.mensagem}\`)">Usar no Envio</button>
+            <div>
+              <h3>${item.titulo}</h3>
+              <p>${item.mensagem}</p>
+            </div>
+            <button class="btn btn-secondary" onclick="copiarTicket(\`${item.mensagem}\`, this)">Copiar para o Kwai</button>
           `;
           container.appendChild(div);
         });
       });
     }
 
-    function usarTexto(tipo, assunto, mensagem) {
+    // Renderizar carrossel de E-mails (Vai para a central de envio)
+    function renderizarCarouselEmails(elementId, banco) {
+      const container = document.getElementById(elementId);
+      container.innerHTML = '';
+
+      banco.categorias.forEach(cat => {
+        cat.itens.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'carousel-item';
+          div.innerHTML = `
+            <div>
+              <h3>${item.titulo}</h3>
+              <p>${item.mensagem}</p>
+            </div>
+            <button class="btn btn-secondary" onclick="usarEmail(\`${item.assunto || ''}\`, \`${item.mensagem}\`)">Usar no Envio</button>
+          `;
+          container.appendChild(div);
+        });
+      });
+    }
+
+    // Função para copiar o ticket direto para a área de transferência
+    function copiarTicket(mensagemBase, botao) {
+      const idAlvo = document.getElementById('idAlvoTicket').value.trim();
+      const textoFinal = idAlvo ? `${mensagemBase} ${idAlvo}` : mensagemBase;
+
+      navigator.clipboard.writeText(textoFinal).then(() => {
+        const originalText = botao.innerText;
+        botao.innerText = 'Copiado!';
+        botao.style.borderColor = '#00ff88';
+        botao.style.color = '#00ff88';
+        setTimeout(() => {
+          botao.innerText = originalText;
+          botao.style.borderColor = '';
+          botao.style.color = '';
+        }, 2000);
+      }).catch(err => {
+        alert('Erro ao copiar texto: ' + err);
+      });
+    }
+
+    // Enviar texto de e-mail para a aba de Envio
+    function usarEmail(assunto, mensagem) {
       const idAlvo = document.getElementById('idAlvo').value || '[ID_ALVO]';
       const meuId = document.getElementById('meuId').value || '[MEU_ID]';
       
-      let msgFormatada = mensagem
-        .replace('{ID_ALVO}', idAlvo)
-        .replace('{MEU_ID}', meuId);
+      const msgFormatada = mensagem
+        .replace(/{ID_ALVO}/g, idAlvo)
+        .replace(/{MEU_ID}/g, meuId);
 
-      // Se for ticket, apenas adiciona o ID do alvo no final se já não estiver lá
-      if (tipo === 'ticket') {
-        msgFormatada += ' ' + idAlvo;
-        document.getElementById('assuntoManual').value = 'Denúncia via Ticket';
-      } else {
-        const assuntoFormatado = assunto.replace('{ID_ALVO}', idAlvo).replace('{MEU_ID}', meuId);
-        document.getElementById('assuntoManual').value = assuntoFormatado;
-      }
+      const assuntoFormatado = assunto
+        .replace(/{ID_ALVO}/g, idAlvo)
+        .replace(/{MEU_ID}/g, meuId);
 
+      document.getElementById('assuntoManual').value = assuntoFormatado;
       document.getElementById('mensagemManual').value = msgFormatada;
 
       // Muda automaticamente para a aba de Envio (4ª opção da barra)
