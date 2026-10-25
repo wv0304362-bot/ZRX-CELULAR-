@@ -1,0 +1,15 @@
+{
+  "categorias": [
+    {
+      "id": "emails_suporte",
+      "nome": "Suporte e E-mails Formais",
+      "itens": [
+        {
+          "titulo": "Denúncia Grave de Perfil (E-mail)",
+          "assunto": "Solicitação Urgente de Análise e Punição de Conta - ID Alvo: {ID_ALVO}",
+          "mensagem": "Prezada equipe de suporte do Kwai,\n\nVenho por meio deste e-mail solicitar a verificação urgente da conta mencionada abaixo, pois ela infringe os termos de uso da plataforma.\n\n- ID da conta denunciada: {ID_ALVO}\n- Meu ID de usuário (Denunciante): {MEU_ID}\n\nAgradeço a atenção e aguardo providências."
+        }
+      ]
+    }
+  ]
+}
