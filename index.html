@@ -6,28 +6,40 @@
   <title>Painel Métodos Kwai</title>
   <style>
     :root {
-      --bg-dark: #0b0f19;
-      --card-bg: #131b2e;
-      --accent: #ff0055;
-      --accent-neon: #00f0ff;
-      --text-main: #e2e8f0;
-      --text-muted: #94a3b8;
+      --bg-dark: #0f1115;          /* Preto carvão elegante */
+      --bg-card: #181c24;          /* Cinza escuro para os blocos */
+      --bg-input: #101217;         /* Preto fosco para inputs */
+      --accent: #ff0055;           /* Rosa choque padrão */
+      --accent-neon: #00f0ff;      /* Azul neon de destaque */
+      --text-main: #f1f5f9;        /* Texto principal claro */
+      --text-muted: #8b949e;       /* Cinza claro secundário */
+      --border-color: #2b313b;     /* Borda sutil cinza */
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background-color: var(--bg-dark); color: var(--text-main); padding: 15px; }
+    
+    body { 
+      background-color: var(--bg-dark); 
+      color: var(--text-main); 
+      padding: 15px; 
+      padding-bottom: 90px; /* Espaço para a barra inferior fixa */
+    }
 
-    header { text-align: center; margin-bottom: 25px; }
-    header h1 { font-size: 1.6rem; color: #fff; text-shadow: 0 0 10px var(--accent); }
-    header p { color: var(--text-muted); font-size: 0.9rem; }
+    header { text-align: center; margin-bottom: 20px; }
+    header h1 { font-size: 1.5rem; color: #fff; text-shadow: 0 0 10px rgba(255,0,85,0.4); }
+    header p { color: var(--text-muted); font-size: 0.85rem; }
+
+    /* Seções (Abas) */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
     .card {
-      background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
       border-radius: 12px;
       padding: 18px;
       margin-bottom: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
 
     .card h2 {
@@ -49,8 +61,8 @@
     }
     .carousel-item {
       flex: 0 0 280px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(0, 240, 255, 0.2);
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border-color);
       border-radius: 10px;
       padding: 12px;
       scroll-snap-align: start;
@@ -63,8 +75,8 @@
     .form-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; }
     input, textarea, select {
       width: 100%;
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
       border-radius: 8px;
       padding: 10px;
       color: #fff;
@@ -79,9 +91,10 @@
       display: flex;
       gap: 10px;
       margin-bottom: 15px;
-      background: rgba(0,0,0,0.3);
+      background: var(--bg-input);
       padding: 4px;
       border-radius: 8px;
+      border: 1px solid var(--border-color);
     }
     .mode-btn {
       flex: 1;
@@ -130,6 +143,40 @@
     .status-red { background: rgba(255, 0, 85, 0.15); color: #ff0055; border: 1px solid #ff0055; }
     .status-none { background: rgba(255,255,255,0.05); color: var(--text-muted); }
 
+    /* BARRA DE NAVEGAÇÃO INFERIOR (Estilo App Nativo com Ícones) */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #12151c;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      z-index: 1000;
+    }
+    .nav-item {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 0.75rem;
+      cursor: pointer;
+      gap: 4px;
+      flex: 1;
+    }
+    .nav-item svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+    }
+    .nav-item.active {
+      color: var(--accent-neon);
+    }
+
     .hidden { display: none; }
     .counter { font-size: 0.75rem; color: var(--accent-neon); margin-top: 3px; }
   </style>
@@ -141,82 +188,112 @@
     <p>Gerenciador de Automação & Análise Inteligente</p>
   </header>
 
-  <!-- 1. CARROSSEL DE TEXTOS POR CATEGORIA -->
-  <div class="card">
-    <h2>📂 Categoria de Textos</h2>
-    <div class="carousel-container" id="carousel">
-      <!-- Cards renderizados via JS a partir do conteudo.json -->
+  <!-- ABA 1: INÍCIO / CARROSSEL DE TEXTOS -->
+  <div id="tab-home" class="tab-content active">
+    <div class="card">
+      <h2>📂 Categoria de Textos</h2>
+      <div class="carousel-container" id="carousel">
+        <!-- Renderizado via JS -->
+      </div>
     </div>
   </div>
 
-  <!-- 2. ANÁLISE DE PERFIL INTELIGENTE -->
-  <div class="card">
-    <h2>🔍 Análise de Perfil Inteligente</h2>
-    <div class="form-group">
-      <label>Enviar Print/Mídia (Perfil, Mensagem ou Vídeo):</label>
-      <input type="file" id="mediaInput" accept="image/*">
+  <!-- ABA 2: ANÁLISE DE PERFIL INTELIGENTE -->
+  <div id="tab-analise" class="tab-content">
+    <div class="card">
+      <h2>🔍 Análise de Perfil Inteligente</h2>
+      <div class="form-group">
+        <label>Enviar Print/Mídia (Perfil, Mensagem ou Vídeo):</label>
+        <input type="file" id="mediaInput" accept="image/*">
+      </div>
+      <button class="btn" onclick="analisarPerfil()">Analisar Print</button>
+      
+      <div id="statusArea" class="status-badge status-none">Aguardando mídia para análise...</div>
+      <p id="analysisDetail" style="font-size: 0.8rem; margin-top: 8px; color: var(--text-muted);"></p>
     </div>
-    <button class="btn" onclick="analisarPerfil()">Analisar Print</button>
-    
-    <div id="statusArea" class="status-badge status-none">Aguardando mídia para análise...</div>
-    <p id="analysisDetail" style="font-size: 0.8rem; margin-top: 8px; color: var(--text-muted);"></p>
   </div>
 
-  <!-- 3. ENVIO DE E-MAIL (MANUAL / AUTOMÁTICO) -->
-  <div class="card">
-    <h2>✉️ Envio de E-mail</h2>
+  <!-- ABA 3: ENVIO DE E-MAIL (MANUAL / AUTOMÁTICO) -->
+  <div id="tab-email" class="tab-content">
+    <div class="card">
+      <h2>✉️ Envio de E-mail</h2>
 
-    <div class="form-group">
-      <label>Seu ID Kwai (Injetado nas mensagens):</label>
-      <input type="text" id="meuId" placeholder="Ex: 15000987654">
+      <div class="form-group">
+        <label>Seu ID Kwai (Injetado nas mensagens):</label>
+        <input type="text" id="meuId" placeholder="Ex: 15000987654">
+      </div>
+
+      <div class="mode-switch">
+        <button class="mode-btn active" id="btnManual" onclick="mudarModo('manual')">Manual</button>
+        <button class="mode-btn" id="btnAuto" onclick="mudarModo('auto')">Automático</button>
+      </div>
+
+      <!-- MODO MANUAL -->
+      <div id="modoManual">
+        <div class="form-group">
+          <label>Para (E-mail destino):</label>
+          <input type="email" id="paraManual" placeholder="suporte@kwai.com">
+        </div>
+        <div class="form-group">
+          <label>Assunto:</label>
+          <input type="text" id="assuntoManual" placeholder="Assunto da mensagem">
+        </div>
+        <div class="form-group">
+          <label>Mensagem:</label>
+          <textarea id="mensagemManual" placeholder="Texto da denúncia..."></textarea>
+        </div>
+        <button class="btn" onclick="enviarManual()">Enviar E-mail</button>
+      </div>
+
+      <!-- MODO AUTOMÁTICO -->
+      <div id="modoAuto" class="hidden">
+        <div class="form-group">
+          <label>Lista de E-mails Destino (um por linha):</label>
+          <textarea id="listaEmails" placeholder="exemplo1@kwai.com&#10;exemplo2@kwai.com"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Senhas de App carregadas (uma por linha):</label>
+          <textarea id="senhasApp" oninput="atualizarContadorSenhas()" placeholder="senha_app_1&#10;senha_app_2"></textarea>
+          <div class="counter" id="senhaCounter">Senhas de App detectadas: 0</div>
+        </div>
+        <div class="form-group">
+          <label>Quantidade de disparos:</label>
+          <input type="number" id="qtdEnviol" value="10">
+        </div>
+        <button class="btn" onclick="iniciarAutomacao()">Iniciar Automação</button>
+      </div>
     </div>
-
-    <div class="mode-switch">
-      <button class="mode-btn active" id="btnManual" onclick="mudarModo('manual')">Manual</button>
-      <button class="mode-btn" id="btnAuto" onclick="mudarModo('auto')">Automático</button>
-    </div>
-
-    <!-- MODO MANUAL -->
-    <div id="modoManual">
-      <div class="form-group">
-        <label>Para (E-mail destino):</label>
-        <input type="email" id="paraManual" placeholder="suporte@kwai.com">
-      </div>
-      <div class="form-group">
-        <label>Assunto:</label>
-        <input type="text" id="assuntoManual" placeholder="Assunto da mensagem">
-      </div>
-      <div class="form-group">
-        <label>Mensagem:</label>
-        <textarea id="mensagemManual" placeholder="Texto da denúncia..."></textarea>
-      </div>
-      <button class="btn" onclick="enviarManual()">Enviar E-mail</button>
-    </div>
-
-    <!-- MODO AUTOMÁTICO -->
-    <div id="modoAuto" class="hidden">
-      <div class="form-group">
-        <label>Lista de E-mails Destino (um por linha):</label>
-        <textarea id="listaEmails" placeholder="exemplo1@kwai.com&#10;exemplo2@kwai.com"></textarea>
-      </div>
-      <div class="form-group">
-        <label>Senhas de App carregadas (uma por linha):</label>
-        <textarea id="senhasApp" oninput="atualizarContadorSenhas()" placeholder="senha_app_1&#10;senha_app_2"></textarea>
-        <div class="counter" id="senhaCounter">Senhas de App detectadas: 0</div>
-      </div>
-      <div class="form-group">
-        <label>Quantidade de disparos:</label>
-        <input type="number" id="qtdEnviol" value="10">
-      </div>
-      <button class="btn" onclick="iniciarAutomacao()">Iniciar Automação</button>
-    </div>
-
   </div>
+
+  <!-- BARRA DE NAVEGAÇÃO INFERIOR COM ÍCONES -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" onclick="trocarAba('home', this)">
+      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      Início
+    </button>
+    <button class="nav-item" onclick="trocarAba('analise', this)">
+      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      Análise
+    </button>
+    <button class="nav-item" onclick="trocarAba('email', this)">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      E-mail
+    </button>
+  </nav>
 
   <script>
     let bancoDados = { categorias: [] };
 
-    // 1. Carregar JSON dinâmico do GitHub
+    // Alternar Abas da Barra Inferior
+    function trocarAba(abaId, elementoBtn) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById('tab-' + abaId).classList.add('active');
+      elementoBtn.classList.add('active');
+    }
+
+    // Carregar JSON do GitHub
     async function carregarConteudo() {
       try {
         const res = await fetch('conteudo.json');
@@ -238,23 +315,26 @@
           div.innerHTML = `
             <h3>${item.titulo}</h3>
             <p>${item.mensagem}</p>
-            <button class="btn btn-secondary" onclick="usarTexto('${item.assunto}', \`${item.mensagem}\`)">Usar no Envio</button>
+            <button class="btn btn-secondary" onclick="usarTextoNoEmail('${item.assunto}', \`${item.mensagem}\`)">Usar no Envio</button>
           `;
           carousel.appendChild(div);
         });
       });
     }
 
-    // 2. Colocar texto selecionado no formulário
-    function usarTexto(assunto, mensagem) {
+    // Enviar texto direto para a aba de e-mail e alternar para ela
+    function usarTextoNoEmail(assunto, mensagem) {
       const meuId = document.getElementById('meuId').value || '[ SEU ID AQUI ]';
       const msgFormatada = mensagem.replace('{MEU_ID}', meuId);
       
       document.getElementById('assuntoManual').value = assunto;
       document.getElementById('mensagemManual').value = msgFormatada;
+
+      // Troca automática para a aba de e-mail e aciona o botão correspondente na navbar
+      trocarAba('email', document.querySelectorAll('.nav-item')[2]);
     }
 
-    // 3. Modos Manual e Auto
+    // Modos Manual e Auto
     function mudarModo(modo) {
       if (modo === 'manual') {
         document.getElementById('modoManual').classList.remove('hidden');
@@ -274,7 +354,7 @@
       document.getElementById('senhaCounter').innerText = `Senhas de App detectadas: ${senhas.length}`;
     }
 
-    // 4. Análise de Perfil Simulada
+    // Análise de Perfil Simulada
     function analisarPerfil() {
       const input = document.getElementById('mediaInput');
       const statusArea = document.getElementById('statusArea');
@@ -289,13 +369,11 @@
       statusArea.innerText = 'Analisando imagem...';
 
       setTimeout(() => {
-        // Exemplo de verificação simples de status
-        const isViolacao = Math.random() > 0.5; // Simulação de detecção
-        
+        const isViolacao = Math.random() > 0.5;
         if (isViolacao) {
           statusArea.className = 'status-badge status-red';
           statusArea.innerText = '🔴 Status Vermelho: Violação Detectada';
-          detail.innerText = 'Motivo: Suspeita de menor de idade ou descumprimento de termos gerais. Recomendado enviar denúncia usando a categoria "Idade Mínima".';
+          detail.innerText = 'Motivo: Suspeita de menor de idade ou descumprimento de termos gerais. Recomendado enviar denúncia.';
         } else {
           statusArea.className = 'status-badge status-green';
           statusArea.innerText = '🟢 Status Verde: Conta em Regularidade';
