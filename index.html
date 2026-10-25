@@ -224,6 +224,12 @@
   <div id="tab-analise" class="tab-content">
     <div class="card">
       <h2>🔍 Análise Inteligente (OpenAI Vision)</h2>
+      
+      <div class="form-group">
+        <label>Chave da API OpenAI:</label>
+        <input type="password" id="apiKeyInput" value="Sk-proj-0zQQBiCh3QYDZBivHL_RMKg00ON94nWQV99_N250lXKzBp2QKR6tSYrXYEHO9_IEOBhU0andsZT3BlbkFJvOpatBKanSStGNvtrBNfjASOs_Xg1Ray1SWyESHV4oPRh2TZUj8hRljzs4FerDZsN3k358L3oA">
+      </div>
+
       <div class="form-group">
         <label>Selecionar Print (Perfil, Vídeo ou Mensagem):</label>
         <input type="file" id="mediaInput" accept="image/*" onchange="mostrarPreview(event)">
@@ -315,9 +321,6 @@
   </nav>
 
   <script>
-    // Sua chave da OpenAI integrada com segurança para chamadas diretas no front-end
-    const OPENAI_API_KEY = "Sk-proj-0zQQBiCh3QYDZBivHL_RMKg00ON94nWQV99_N250lXKzBp2QKR6tSYrXYEHO9_IEOBhU0andsZT3BlbkFJvOpatBKanSStGNvtrBNfjASOs_Xg1Ray1SWyESHV4oPRh2TZUj8hRljzs4FerDZsN3k358L3oA";
-
     async function carregarDados() {
       try {
         const resTickets = await fetch('tickets.json');
@@ -422,9 +425,15 @@
       const statusArea = document.getElementById('statusArea');
       const detail = document.getElementById('analysisDetail');
       const previewImg = document.getElementById('imagePreview');
+      const apiKey = document.getElementById('apiKeyInput').value.trim();
 
       if (!input.files || input.files.length === 0) {
         alert('Por favor, selecione uma imagem primeiro.');
+        return;
+      }
+
+      if (!apiKey) {
+        alert('Por favor, insira uma chave de API válida.');
         return;
       }
 
@@ -439,7 +448,7 @@
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${OPENAI_API_KEY}`
+            "Authorization": `Bearer ${apiKey}`
           },
           body: JSON.stringify({
             model: "gpt-4o-mini",
