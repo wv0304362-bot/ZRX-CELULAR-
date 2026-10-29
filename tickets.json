@@ -1,12 +1,186 @@
 {
   "categorias": [
     {
-      "id": "tickets_idade",
-      "nome": "Denúncias de Idade",
+      "nome": "+18",
+      "itens": [
+        {
+          "titulo": "Denúncia de Conteúdo +18",
+          "mensagem": "Denúncia de Conteúdo +18: O perfil publica/envia material de teor adulto sem a devida restrição de idade ou aviso prévio. Solicito análise e remoção. ID: [ID]"
+        },
+        {
+          "titulo": "Violação por Conteúdo Adulto",
+          "mensagem": "Violação por Conteúdo Adulto: O titular da conta divulga mídias explicitamente adultas em desacordo com as regras de convivência da plataforma. Peço intervenção. ID: [ID]"
+        },
+        {
+          "titulo": "Exibição de Material Explícito",
+          "mensagem": "Exibição de Material Explícito: Perfil dedicado à publicação de conteúdo sensível/explícito sem conformidade com as diretrizes de idade. Solicito aplicação de sanções. ID: [ID]"
+        },
+        {
+          "titulo": "Denúncia - Conteúdo Impróprio",
+          "mensagem": "Denúncia - Conteúdo Impróprio: A conta veicula imagens ou vídeos de cunho +18 em áreas de acesso geral da comunidade. Peço revisão da moderação. ID: [ID]"
+        },
+        {
+          "titulo": "Infração dos Termos (Conteúdo Sensível)",
+          "mensagem": "Infração dos Termos (Conteúdo Sensível): Distribuição de mídias adultas não solicitadas, violando os Termos de Serviço sobre exibição de conteúdo restrito. ID: [ID]"
+        },
+        {
+          "titulo": "Divulgação de Mídia Explícita",
+          "mensagem": "Divulgação de Mídia Explícita: O perfil promove e compartilha material restrito para maiores de forma irregular na rede. Solicito a desativação da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Restrição de Conteúdo +18",
+          "mensagem": "Restrição de Conteúdo +18: Perfil com publicações de teor adulto sem aplicar as marcações obrigatórias de conteúdo sensível. Solicito providências da equipe. ID: [ID]"
+        },
+        {
+          "titulo": "Violação das Diretrizes de Conteúdo",
+          "mensagem": "Violação das Diretrizes de Conteúdo: O usuário compartilha links e arquivos de cunho explicitamente adulto em descumprimento das normas vigentes. ID: [ID]"
+        },
+        {
+          "titulo": "Denúncia de Material Impróprio",
+          "mensagem": "Denúncia de Material Impróprio: Conta utilizada para a disseminação de mídias +18 não autorizadas. Solicito verificação e suspensão do perfil. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Moderação (Conteúdo +18)",
+          "mensagem": "Solicitação de Moderação (Conteúdo +18): Perfil em desacordo com as regras relativas a material sensível/adulto. Peço a análise do ID e aplicação das regras. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "ALICIAMENTO",
+      "itens": [
+        {
+          "titulo": "Denúncia de Aliciamento",
+          "mensagem": "Denúncia de Aliciamento: O perfil utiliza a plataforma para abordar e aliciar usuários de forma inadequada e predatória. Solicito análise urgente e suspensão imediata da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Abordagem Predatória",
+          "mensagem": "Abordagem Predatória: O titular da conta adota conduta incompatível com as diretrizes, tentando aliciar membros da comunidade. Peço verificação prioritária da moderação. ID: [ID]"
+        },
+        {
+          "titulo": "Violação de Segurança Infantil",
+          "mensagem": "Violação de Segurança Infantil: Perfil engajado em tentativas de aliciamento e comportamento ostensivamente predatório direcionado a menores. Solicito bloqueio e análise formal. ID: [ID]"
+        },
+        {
+          "titulo": "Denúncia - Conduta Abusiva",
+          "mensagem": "Denúncia - Conduta Abusiva: O usuário utiliza a rede para perseguição e investidas inadequada de teor predatório. Solicito a aplicação rigorosa das regras da comunidade. ID: [ID]"
+        },
+        {
+          "titulo": "Infração dos Termos (Aliciamento)",
+          "mensagem": "Infração dos Termos (Aliciamento): Conta dedicada a abordagens abusivas e aliciamento direto. Solicito intervenção imediata da equipe de segurança e banimento do perfil. ID: [ID]"
+        },
+        {
+          "titulo": "Comportamento Inadequado Grave",
+          "mensagem": "Comportamento Inadequado Grave: O titular do perfil apresenta histórico de interações predatórias e aliciamento sistemático. Peço análise urgente dos registros do usuário. ID: [ID]"
+        },
+        {
+          "titulo": "Perigo à Comunidade",
+          "mensagem": "Perigo à Comunidade: Usuário identificável por conduta predatória e envio de abordagens impróprias a terceiros. Solicito a desativação da conta por violação grave de segurança. ID: [ID]"
+        },
+        {
+          "titulo": "Denúncia de Perseguição Predatória",
+          "mensagem": "Denúncia de Perseguição Predatória: O perfil utiliza a plataforma com a finalidade de atrair e coagir usuários de forma abusiva. Solicito imediata intervenção da equipe de suporte. ID: [ID]"
+        },
+        {
+          "titulo": "Violação Grave das Diretrizes",
+          "mensagem": "Violação Grave das Diretrizes: Conta utilizada ativamente para práticas de aliciamento, colocando em risco a segurança dos usuários. Peço suspensão imediata do perfil. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Intervenção Urgente",
+          "mensagem": "Solicitação de Intervenção Urgente: Perfil identificado por conduta predatória e abordagens indevidas. Solicito à moderação a verificação do ID e remoção permanente da plataforma. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "ASSÉDIO",
+      "itens": [
+        {
+          "titulo": "Denúncia de Assédio",
+          "mensagem": "Denúncia de Assédio: O perfil utiliza a plataforma para enviar mensagens ostensivas, ofensivas e indesejadas, violando os Termos de Uso. Solicito análise da moderação e bloqueio. ID: [ID]"
+        },
+        {
+          "titulo": "Violação por Perseguição/Assédio",
+          "mensagem": "Violação por Perseguição/Assédio: O usuário pratica comportamento de perseguição e importunação direta contra outros membros da comunidade. Peço aplicação das medidas cabíveis. ID: [ID]"
+        },
+        {
+          "titulo": "Assédio e Intimidação",
+          "mensagem": "Assédio e Intimidação: Perfil dedicado a intimidar, coagir e enviar conteúdo hostil de forma recorrente. Solicito revisão urgente e suspensão da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Denúncia de Comportamento Abusivo",
+          "mensagem": "Denúncia de Comportamento Abusivo: O titular da conta envia ataques direcionados e comentários de cunho ostensivo/ofensivo. Solicito intervenção da equipe de moderação. ID: [ID]"
+        },
+        {
+          "titulo": "Infração dos Termos (Assédio)",
+          "mensagem": "Infração dos Termos (Assédio): Conta utilizada ativamente para importunar e perseguir usuários sem consentimento. Peço análise imediata do ID informado. ID: [ID]"
+        },
+        {
+          "titulo": "Assédio Direto",
+          "mensagem": "Assédio Direto: O perfil publica e/ou envia mensagens de teor intimidador e desrespeitoso, ferindo as diretrizes de convivência da plataforma. Solicito remoção do perfil. ID: [ID]"
+        },
+        {
+          "titulo": "Perseguição Indesejada",
+          "mensagem": "Perseguição Indesejada: Usuário insiste em interações hostis e indesejadas mesmo após solicitações de interrupção. Solicito verificação e punição da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Denúncia de Hostilidade",
+          "mensagem": "Denúncia de Hostilidade: O titular pratica assédio continuado contra terceiros na rede, violando as regras contra conduta odiosa e abusiva. Peço providências. ID: [ID]"
+        },
+        {
+          "titulo": "Violação de Segurança (Assédio)",
+          "mensagem": "Violação de Segurança (Assédio): Perfil engajado em condutas de intimidação sistemática e difamação de usuários. Solicito o bloqueio do perfil e análise do conteúdo. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Moderação (Assédio)",
+          "mensagem": "Solicitação de Moderação (Assédio): Conta envolvida na prática de assédio e importunação grave. Peço à equipe de suporte que aplique os Termos de Serviço vigentes. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "MENOR DE IDADE",
       "itens": [
         {
           "titulo": "Menor de 16 Anos",
-          "mensagem": "Denúncia: Este usuário aparenta ter menos de 16 anos e está usando a plataforma sem a supervisão necessária. Peço que verifiquem a idade e apliquem as diretrizes da comunidade. ID:"
+          "mensagem": "Denúncia: Este usuário aparenta ter menos de 16 anos e está usando a plataforma sem a supervisão necessária. Peço que verifiquem a idade e apliquem as diretrizes da comunidade. ID: [ID]"
+        },
+        {
+          "titulo": "Denúncia de Idade",
+          "mensagem": "Denúncia de Idade: O titular do perfil demonstra expressamente ser menor de idade, violando os Termos de Serviço sobre idade mínima da plataforma. Solicito revisão e suspensão da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Violação de Idade Mínima",
+          "mensagem": "Violação de Idade Mínima: Perfil mantido por usuário visivelmente menor de idade sem permissão ou supervisão parental. Peço análise imediata da equipe de moderação. ID: [ID]"
+        },
+        {
+          "titulo": "Usuário Menor de Idade",
+          "mensagem": "Usuário Menor de Idade: A conta pertence a um menor de idade que divulga conteúdos em desacordo com as diretrizes de idade da plataforma. Solicito aplicação das medidas cabíveis. ID: [ID]"
+        },
+        {
+          "titulo": "Denúncia - Restrição de Idade",
+          "mensagem": "Denúncia - Restrição de Idade: O usuário declara/demonstra idade inferior ao limite permitido pelos Termos de Uso. Solicito a verificação e o bloqueio do perfil. ID: [ID]"
+        },
+        {
+          "titulo": "Infração dos Termos (Idade)",
+          "mensagem": "Infração dos Termos (Idade): Perfil ativo gerido por menor de idade. Solicito análise formal e encerramento da conta por descumprimento das regras de uso da comunidade. ID: [ID]"
+        },
+        {
+          "titulo": "Denúncia de Segurança",
+          "mensagem": "Denúncia de Segurança: Conta utilizada por pessoa menor de idade, gerando riscos de conformidade e segurança na plataforma. Peço verificação da moderação. ID: [ID]"
+        },
+        {
+          "titulo": "Conta de Menor",
+          "mensagem": "Conta de Menor: O titular não possui a idade mínima necessária para uso da plataforma. Solicito intervenção da equipe para validação e remoção do perfil. ID: [ID]"
+        },
+        {
+          "titulo": "Violação das Diretrizes de Idade",
+          "mensagem": "Violação das Diretrizes de Idade: Solicito a análise desta conta, pois o responsável pelo perfil aparenta e/ou afirma ser menor de idade. Apliquem as sanções padrão. ID: [ID]"
+        },
+        {
+          "titulo": "Denúncia Direta - Idade Mínima",
+          "mensagem": "Denúncia Direta - Idade Mínima: Usuário menor de idade ativo na plataforma sem acompanhamento dos responsáveis. Peço encerramento do perfil por infração dos Termos. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Moderação",
+          "mensagem": "Solicitação de Moderação: Perfil irregular pertencente a menor de idade. Solicito a verificação do ID fornecido e o cumprimento das normas de restrição etária. ID: [ID]"
         }
       ]
     }
