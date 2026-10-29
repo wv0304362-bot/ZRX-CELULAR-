@@ -175,12 +175,728 @@
           "mensagem": "Violação das Diretrizes de Idade: Solicito a análise desta conta, pois o responsável pelo perfil aparenta e/ou afirma ser menor de idade. Apliquem as sanções padrão. ID: [ID]"
         },
         {
-          "titulo": "Denúncia Direta - Idade Mínima",
-          "mensagem": "Denúncia Direta - Idade Mínima: Usuário menor de idade ativo na plataforma sem acompanhamento dos responsáveis. Peço encerramento do perfil por infração dos Termos. ID: [ID]"
-        },
-        {
           "titulo": "Solicitação de Moderação",
           "mensagem": "Solicitação de Moderação: Perfil irregular pertencente a menor de idade. Solicito a verificação do ID fornecido e o cumprimento das normas de restrição etária. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "DOXXING",
+      "itens": [
+        {
+          "titulo": "Vazamento de Dados Pessoais",
+          "mensagem": "Denúncia de Doxxing: O perfil divulga abertamente dados pessoais de terceiros sem autorização (CPF, endereço, telefone). Solicito remoção imediata e banimento da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Exposição de Informações Privadas",
+          "mensagem": "Exposição Indevida: A conta publica documentos e informações privadas com o intuito de prejudicar e expor usuários. Solicito intervenção de urgência. ID: [ID]"
+        },
+        {
+          "titulo": "Divulgação de Documentos",
+          "mensagem": "Violação de Privacidade: O usuário faz vazamentos de fotos de documentos reais e endereços residenciais de terceiros. Peço suspensão imediata da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Prática de Doxxing Continuada",
+          "mensagem": "Denúncia de Doxxing: Perfil dedicado à exposição e chantagem com dados confidenciais de membros da comunidade. Solicito bloqueio urgente do ID. ID: [ID]"
+        },
+        {
+          "titulo": "Vazamento de Contatos e Endereço",
+          "mensagem": "Ameaça à Privacidade: A conta veicula números de telefone particulares e localização de vítimas. Solicito a exclusão imediata das publicações e punição. ID: [ID]"
+        },
+        {
+          "titulo": "Atividades de Exposição Ilícita",
+          "mensagem": "Infração Grave (Doxxing): O perfil espalha fichas cadastrais e dados sensíveis de usuários no feed da rede. Solicito suspensão da conta por risco à segurança. ID: [ID]"
+        },
+        {
+          "titulo": "Vazamento de Dados Bancários/Pessoais",
+          "mensagem": "Exposição Maliciosa: O titular da conta divulga dados bancários e dados de familiares de terceiros. Solicito moderação imediata da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Ameaça por Exposição de Dados",
+          "mensagem": "Doxxing e Intimidação: O usuário ameaça divulgar informações privadas de outros membros para coagil-os. Solicito a desativação da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Compartilhamento Sem Consentimento",
+          "mensagem": "Violação de Dados Privados: Publicação de prontuários, documentos e dados confidenciais de terceiros sem permissão. Peço bloqueio formal do perfil. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Remoção (Doxxing)",
+          "mensagem": "Doxxing Ativo: Perfil utilizado ativamente como repositório de vazamento de dados pessoais. Solicito análise e banimento definitivo do ID. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "CYBERBULLYING",
+      "itens": [
+        {
+          "titulo": "Prática de Cyberbullying",
+          "mensagem": "Denúncia de Cyberbullying: O perfil orquestra ataques de humilhação pública e ofensas sistemáticas contra outros usuários. Solicito intervenção da equipe. ID: [ID]"
+        },
+        {
+          "titulo": "Difamação e Humilhação",
+          "mensagem": "Ataque Repetitivo: A conta publica contínuos vídeos e comentários direcionados a desmoralizar usuários. Peço suspensão do perfil. ID: [ID]"
+        },
+        {
+          "titulo": "Incite ao Ódio e Julgamento",
+          "mensagem": "Cyberbullying Organizado: O usuário incentiva seus seguidores a atacarem e ridicularizarem determinado perfil. Solicito sanção imediata. ID: [ID]"
+        },
+        {
+          "titulo": "Agressão Verbal Coletiva",
+          "mensagem": "Denúncia de Bullying Virtual: Perfil criado para hostilizar e humilhar membros da plataforma com apelidos pejorativos. Pedido de bloqueio urgente. ID: [ID]"
+        },
+        {
+          "titulo": "Criação de Memes Ofensivos",
+          "mensagem": "Uso Indevido de Imagem para Bullying: Produção de edições e chacotas com imagens de terceiros com o intuito de ridicularizá-los. ID: [ID]"
+        },
+        {
+          "titulo": "Perseguição Virtual Continuada",
+          "mensagem": "Ataque Sistemático: Perfil perseguindo outros usuários em diversas publicações com comentários pejorativos e ofensas. Solicito suspensão da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Exposição Ridicularizante",
+          "mensagem": "Denúncia - Cyberbullying: O usuário utiliza gravações não autorizadas para zombar de pessoas na plataforma. Solicito remoção do conteúdo e bloqueio. ID: [ID]"
+        },
+        {
+          "titulo": "Intimidação Virtual",
+          "mensagem": "Infração dos Termos (Bullying): Envio recorrente de chacotas e ofensas que causam danos emocionais à vítima. Peço análise do ID informado. ID: [ID]"
+        },
+        {
+          "titulo": "Disseminação de Insultos",
+          "mensagem": "Comportamento Tóxico/Bullying: Perfil focado na humilhação de terceiros através de legendas e edições desrespeitosas. Solicito providências formais. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Suspensão (Cyberbullying)",
+          "mensagem": "Ataques de Cyberbullying: Conta violando ativamente as regras de convivência amigável ao ridicularizar pessoas. Peço banimento do perfil. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "USURPAÇÃO DE IDENTIDADE",
+      "itens": [
+        {
+          "titulo": "Falso Perfil (Fake)",
+          "mensagem": "Usurpação de Identidade: Este perfil utiliza a foto e o nome de outra pessoa sem autorização para se passar por ela. Solicito bloqueio urgente. ID: [ID]"
+        },
+        {
+          "titulo": "Impersonação de Marca/Famoso",
+          "mensagem": "Perfil Falso de Figura Pública: A conta finge ser uma figura pública/empresa induzindo seguidores ao erro. Peço suspensão por impersonação. ID: [ID]"
+        },
+        {
+          "titulo": "Uso Indevido de Fotos de Terceiros",
+          "mensagem": "Roubo de Identidade: O usuário roubou fotos e dados do perfil original de outra pessoa para criar uma conta espelho. Solicito remoção. ID: [ID]"
+        },
+        {
+          "titulo": "Perfil Fake Malicioso",
+          "mensagem": "Usurpação de Identidade Maliciosa: Conta fidedigna criada para se passar por terceiros e difamar sua imagem original. Solicito ação imediata. ID: [ID]"
+        },
+        {
+          "titulo": "Falsificação de Perfil Oficial",
+          "mensagem": "Impersonação do Suporte: O perfil utiliza elementos visuais oficiais para se passar pela equipe da plataforma. Solicito desativação imediata. ID: [ID]"
+        },
+        {
+          "titulo": "Clone de Conta",
+          "mensagem": "Denúncia de Clone: Esta conta duplicou exatamente as postagens e informações da vítima. Solicito encerramento por falsidade ideológica. ID: [ID]"
+        },
+        {
+          "titulo": "Enganação de Identidade",
+          "mensagem": "Perfil Falso: Usuário se passa por um conhecido para obter vantagens ou dados com os seguidores da vítima. Solicito suspensão da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Apropriação de Nome e Imagem",
+          "mensagem": "Infração dos Termos (Impersonação): Apropriação indevida da imagem e nome de terceiro sem devida autorização legal. Solicito bloqueio. ID: [ID]"
+        },
+        {
+          "titulo": "Paródia Não Identificada",
+          "mensagem": "Uso Falso de Identidade: Perfil que se passa por outro sem deixar claro na biografia se tratar de conta fã/paródia. Peço intervenção. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Banimento (Fake)",
+          "mensagem": "Conta de Usurpação: Perfil criado para personificar outra pessoa e aplicar golpes ou difamar a vítima. Solicito exclusão permanente da conta. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "DISCURSO DE ÓDIO",
+      "itens": [
+        {
+          "titulo": "Denúncia de Preconceito",
+          "mensagem": "Discurso de Ódio: O perfil publica conteúdos promovendo ataques e discriminação contra grupos minoritários. Solicito remoção e suspensão imediata. ID: [ID]"
+        },
+        {
+          "titulo": "Racismo / Xenofobia",
+          "mensagem": "Violação Grave (Racismo): Publicação contendo injúria racial e comentários preconceituosos sobre origem ou etnia. Peço banimento urgente. ID: [ID]"
+        },
+        {
+          "titulo": "LGBTfobia / Intolerância",
+          "mensagem": "Discurso Odioso: A conta ataca e marginaliza a comunidade LGBTQIA+ com falas de ódio e incitação à violência. Solicito intervenção da moderação. ID: [ID]"
+        },
+        {
+          "titulo": "Intolerância Religiosa",
+          "mensagem": "Ataque a Crenças: O perfil propaga conteúdos ofensivos e desrespeitosos direcionados a grupos religiosos. Peço aplicação dos termos de conduta. ID: [ID]"
+        },
+        {
+          "titulo": "Incitamento à Discriminação",
+          "mensagem": "Denúncia de Discurso de Ódio: Usuário incentivando a exclusão e violência contra determinados grupos sociais. Solicito bloqueio do ID. ID: [ID]"
+        },
+        {
+          "titulo": "Capacitismo",
+          "mensagem": "Preconceito contra PNE: Publicação zombando ou discriminando pessoas com deficiência. Solicito sanções imediatas da plataforma. ID: [ID]"
+        },
+        {
+          "titulo": "Misoginia / Intolerância de Gênero",
+          "mensagem": "Ataques Misóginos: O perfil veicula falas de desvalorização e incitação à violência de gênero contra mulheres. Peço desativação da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Símbolos Odiosos",
+          "mensagem": "Uso de Símbolos de Ódio: Exibição de bandeiras, imagens ou saudações associadas a grupos supremacistas/extremistas. Peço banimento urgente. ID: [ID]"
+        },
+        {
+          "titulo": "Discurso Discriminatório Sistemático",
+          "mensagem": "Conduta Odiosa Repetitiva: Perfil focado na produção contínua de publicações que promovem a divisão e o preconceito. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Remoção (Ódio)",
+          "mensagem": "Violação das Diretrizes (Ódio): Conta dedicada a atacar indivíduos com base em suas características protegidas por lei. Solicito desativação. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "GOLPE E FRAUDE",
+      "itens": [
+        {
+          "titulo": "Divulgação de Golpes Financeiros",
+          "mensagem": "Denúncia de Fraude: O perfil promove esquemas fraudulentos, falsas promessas de ganho fácil e pirâmides financeiras. Solicito bloqueio urgente. ID: [ID]"
+        },
+        {
+          "titulo": "Phishing / Roubo de Contas",
+          "mensagem": "Tentativa de Phishing: A conta envia links suspeitos com o intuito de roubar senhas e dados bancários de usuários. Peço banimento do ID. ID: [ID]"
+        },
+        {
+          "titulo": "Venda Falsa de Produtos",
+          "mensagem": "Fraude Comercial: O perfil anuncia vendas de produtos/serviços falsos sem a entrega, enganando a comunidade. Solicito desativação. ID: [ID]"
+        },
+        {
+          "titulo": "Falso Sorteio / Promoção Enganosa",
+          "mensagem": "Sorteio Fraudulento: Realização de falsos sorteios para angariar seguidores ou solicitar transferências prévias de dinheiro. ID: [ID]"
+        },
+        {
+          "titulo": "Uso de Bugs para Vantagem Ilícita",
+          "mensagem": "Enganação de Sistema: Promoção de métodos ilegais de burla do aplicativo ou promessa de moedas/saldos falsos. Peço suspensão do perfil. ID: [ID]"
+        },
+        {
+          "titulo": "Falsificação de Documentos para Golpes",
+          "mensagem": "Fraude Documental: Exibição de comprovantes e documentos editados para convencer vítimas a realizarem pagamentos. Solicito providências. ID: [ID]"
+        },
+        {
+          "titulo": "Comércio de Serviços Ilícitos",
+          "mensagem": "Oferta de Serviços Ilegais: Perfil vendendo ferramentas de invasão, hack ou esquemas fraudulentos na rede. Solicito remoção do perfil. ID: [ID]"
+        },
+        {
+          "titulo": "Roubo de Identidade para Estelionato",
+          "mensagem": "Estelionato Virtual: Perfil se passando por instituição financeira para solicitar Pix/transferências de usuários. Solicito intervenção urgente. ID: [ID]"
+        },
+        {
+          "titulo": "Promessa Falsa de Monetização",
+          "mensagem": "Fraude de Monetização: Conta cobrando valores de terceiros com a promessa de ativar recursos ou verificar perfis na plataforma. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Banimento (Fraude)",
+          "mensagem": "Perfil Estelionatário: Atividade contínua focada em ludibriar os usuários da comunidade para obter vantagens financeiras. Peço banimento. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "INCENTIVO À VIOLÊNCIA",
+      "itens": [
+        {
+          "titulo": "Ameaça de Morte / Agressão",
+          "mensagem": "Ameaça Grave: O perfil envia e publica ameaças diretas de agressão física ou morte a outros usuários. Solicito intervenção e bloqueio imediato. ID: [ID]"
+        },
+        {
+          "titulo": "Incentivo a Ataques Coletivos",
+          "mensagem": "Apologia à Violência: A conta estimula a invasão, vandalismo ou agressão contra pessoas ou estabelecimentos. Peço desativação urgente. ID: [ID]"
+        },
+        {
+          "titulo": "Exibição de Armas de Fogo",
+          "mensagem": "Uso de Armas / Intimidação: Exibição de armas de fogo com intenções claras de intimidação e ameaça na plataforma. Solicito sanção. ID: [ID]"
+        },
+        {
+          "titulo": "Glorificação de Crimes",
+          "mensagem": "Apologia ao Crime: Perfil enaltecendo atos criminosos e organizações de violência explícita. Solicito banimento permanente da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Conteúdo Violento / Sangrento",
+          "mensagem": "Mídia Chocante/Violenta: Publicação de imagens e vídeos contendo violência explícita, ferimentos graves ou tortura. Peço remoção imediata. ID: [ID]"
+        },
+        {
+          "titulo": "Discurso Incitador de Conflito",
+          "mensagem": "Incitamento ao Armamento/Violência: O perfil incita o confronto físico entre membros da comunidade. Solicito ação da equipe de moderação. ID: [ID]"
+        },
+        {
+          "titulo": "Ameaça a Instituições / Escolas",
+          "mensagem": "Ameaça de Ataque: Publicação de ameaças ou planos de ataques a locais públicos ou instituições. Solicito análise e acionamento urgente. ID: [ID]"
+        },
+        {
+          "titulo": "Agressão Animal",
+          "mensagem": "Maus-Tratos a Animais: Publicação de cenas de violência e crueldade contra animais. Solicito o banimento imediato da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Promoção de Desafios Perigosos",
+          "mensagem": "Desafios Violentos: Incentivo à prática de desafios que resultam em ferimentos físicos graves ou amputações. Peço bloqueio da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Remoção (Violência)",
+          "mensagem": "Ameaça e Violência Ativa: Perfil em total desacordo com os padrões de segurança e paz da comunidade. Peço eliminação do perfil. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "AUTOMUTILAÇÃO E SUICÍDIO",
+      "itens": [
+        {
+          "titulo": "Incentivo à Automutilação",
+          "mensagem": "Denúncia Sensível: O perfil publica conteúdos que incentivam ou ensinam métodos de automutilação. Solicito remoção imediata e suporte ao ID. ID: [ID]"
+        },
+        {
+          "titulo": "Apologia ao Suicídio",
+          "mensagem": "Risco à Vida: A conta divulga mensagens e vídeos que glorificam ou encorajam o suicídio. Peço intervenção prioritária do suporte. ID: [ID]"
+        },
+        {
+          "titulo": "Exibição de Ferimentos de Corte",
+          "mensagem": "Imagens Sensíveis de Cortes: Publicação explicita de cortes e ferimentos no corpo decorrentes de automutilação. Solicito remoção da mídia. ID: [ID]"
+        },
+        {
+          "titulo": "Desafios de Risco de Morte",
+          "mensagem": "Incentivo a Jogos Perigosos: O usuário estimula a participação em 'jogos' que levam à sufocação ou risco de morte. Peço banimento urgente. ID: [ID]"
+        },
+        {
+          "titulo": "Instigação e Depreciação",
+          "mensagem": "Instigação ao Suicídio: Usuário sugerindo que terceiros cometam atos de autodestruição em comentários. Solicito suspensão da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Compartilhamento de Métodos",
+          "mensagem": "Instrução de Atos Sensíveis: O perfil compartilha passos ou produtos para a realização de automutilação. Solicito remoção imediata. ID: [ID]"
+        },
+        {
+          "titulo": "Comunidade de Danos Pessoais",
+          "mensagem": "Grupo de Apoio à Automutilação: Perfil dedicado a unir pessoas para encorajar lesões corporais intencionais. Peço bloqueio formal. ID: [ID]"
+        },
+        {
+          "titulo": "Simulação de Atos de Risco",
+          "mensagem": "Exibição de Comportamento de Alto Risco: Gravações de pessoas em situações extremas de perigo intencional à própria vida. ID: [ID]"
+        },
+        {
+          "titulo": "Live / Postagem de Despedida",
+          "mensagem": "Aviso de Risco Iminente: O usuário postou conteúdos indicando intenção clara de causar dano a si mesmo. Solicito suporte emergencial. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Intervenção de Suporte",
+          "mensagem": "Conteúdo Sensível de Autodestruição: Perfil com posts recorrentes de promoção de danos corporais. Peço suporte e remoção dos posts. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "DIREITOS AUTORAIS",
+      "itens": [
+        {
+          "titulo": "Violação de Copyright",
+          "mensagem": "Violação de Direitos Autorais: O perfil publica mídias/músicas/vídeos protegidos por direitos autorais sem permissão do detentor. Solicito remoção. ID: [ID]"
+        },
+        {
+          "titulo": "Uso Indevido de Marca Registrada",
+          "mensagem": "Infração de Marca: A conta utiliza logotipos e nomes de marcas protegidas de forma não autorizada e enganosa. Peço adequação/remoção. ID: [ID]"
+        },
+        {
+          "titulo": "Re-upload de Conteúdo Exclusivo",
+          "mensagem": "Cópia Não Autorizada: O usuário baixa e republica na íntegra conteúdos originais de outros criadores sem dar créditos. Peço remoção. ID: [ID]"
+        },
+        {
+          "titulo": "Pirataria de Cursos e Livros",
+          "mensagem": "Distribuição Pirata: Compartilhamento de links de pirataria, cursos pagos e livros protegidos por propriedade intelectual. ID: [ID]"
+        },
+        {
+          "titulo": "Pirataria de Software e Apps",
+          "mensagem": "Divulgação de Software Modificado: O perfil distribui versões alteradas/piratas de softwares pagos. Solicito suspensão do conteúdo. ID: [ID]"
+        },
+        {
+          "titulo": "Uso de Produção Audiovisual Integral",
+          "mensagem": "Uso Indevido de Filmes/Séries: Transmissão ou publicação contínua de episódios completos protegidos por copyright. Peço remoção do post. ID: [ID]"
+        },
+        {
+          "titulo": "Uso Não Autorizado de Imagens de Arte",
+          "mensagem": "Plágio Artístico: O titular comercializa ou posta ilustrações/obras de arte sem licença do artista original. Solicito intervenção. ID: [ID]"
+        },
+        {
+          "titulo": "Uso Indevido de Trilhas Sonoras",
+          "mensagem": "Infração de Áudio: Mídias no perfil contendo áudios e músicas de acervo privado sem a compra/licença de uso. ID: [ID]"
+        },
+        {
+          "titulo": "Reprodução Falsificada de Produtos",
+          "mensagem": "Venda de Réplicas/Contrafacção: Promoção e venda de cópias não autorizadas de marcas registradas. Peço desativação do perfil. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação DMCA",
+          "mensagem": "Notificação de Infração Autoral: O titular deste ID republicou mídias proprietárias descumprindo as leis de copyright da rede. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "SPAM E AUTOMAÇÃO",
+      "itens": [
+        {
+          "titulo": "Prática de Spam",
+          "mensagem": "Denúncia de Spam: O perfil envia continuamente mensagens genéricas e indesejadas em massa nos comentários e chats. Solicito bloqueio. ID: [ID]"
+        },
+        {
+          "titulo": "Uso de Bots / Automação",
+          "mensagem": "Uso de Automação Não Autorizada: A conta utiliza scripts e robôs para curtir, seguir e comentar de forma artificial. Peço banimento. ID: [ID]"
+        },
+        {
+          "titulo": "Poluição de Comentários",
+          "mensagem": "Flood de Comentários: Envio repetido da mesma frase ou link em diversos vídeos de forma abusiva. Solicito remoção das mensagens. ID: [ID]"
+        },
+        {
+          "titulo": "Fazenda de Engajamento",
+          "mensagem": "Troca de Engajamento Falso: Perfil participante de esquemas de 'troca de seguidores' e manipulação de métricas da rede. ID: [ID]"
+        },
+        {
+          "titulo": "Uso Abusivo de Hashtags",
+          "mensagem": "Spam de Hashtags Irrelevantes: Publicações usando dezenas de palavras-chave sem relação para manipular o algoritmo. Peço moderação. ID: [ID]"
+        },
+        {
+          "titulo": "Divulgação Excessiva de Links",
+          "mensagem": "Spam de Links Externos: O usuário publica repetidamente direcionamentos para sites externos não confiáveis no feed. ID: [ID]"
+        },
+        {
+          "titulo": "Múltiplas Contas para Envio Massivo",
+          "mensagem": "Rede de Spam: Criação de diversas contas secundárias com a única finalidade de disparar mensagens robóticas. Peço bloqueio do IP/ID. ID: [ID]"
+        },
+        {
+          "titulo": "Mensagens de Texto Padronizadas (Bot)",
+          "mensagem": "Envio Automático Indesejado: Recebimento contínuo de directs automáticos de propaganda e ofertas sem consentimento. ID: [ID]"
+        },
+        {
+          "titulo": "Enganar Métricas da Plataforma",
+          "mensagem": "Manipulação Artificial de Visualizações: Uso de servidores para gerar dados inflados de acessos na conta. Peço análise do perfil. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Bloqueio (Spam)",
+          "mensagem": "Conta Spammer: Atividade que prejudica a experiência e fluidez dos usuários devido à alta taxa de postagens automáticas. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "DESINFORMAÇÃO E FAKE NEWS",
+      "itens": [
+        {
+          "titulo": "Disseminação de Fake News",
+          "mensagem": "Denúncia de Desinformação: O perfil publica notícias falsas manipuladas com o intuito de enganar e causar pânico na comunidade. ID: [ID]"
+        },
+        {
+          "titulo": "Fraude de Saúde / Falsas Curas",
+          "mensagem": "Desinformação Médica: Divulgação de tratamentos perigosos sem comprovação científica ou falsas curas para doenças graves. ID: [ID]"
+        },
+        {
+          "titulo": "Adulteração de Imagens / Deepfakes",
+          "mensagem": "Mídia Manipulada (Deepfake): Publicação de vídeos editados com IA para atribuir falas falsas a pessoas reais. Peço remoção. ID: [ID]"
+        },
+        {
+          "titulo": "Manipulação de Dados Eleitorais",
+          "mensagem": "Desinformação Eleitoral: Publicação de boatos e dados falsos a respeito de processos de votação e eleições. Solicito moderação. ID: [ID]"
+        },
+        {
+          "titulo": "Teorias da Conspiração Perigosas",
+          "mensagem": "Teoria de Conspiração Nociva: Divulgação de teses que incentivam o descumprimento de leis ou risco à segurança pública. ID: [ID]"
+        },
+        {
+          "titulo": "Falsificação de Documentos de Notícia",
+          "mensagem": "Uso de Logos de Jornalismo Falsificados: Criação de prints falsos imitando portais de notícias para espalhar mentiras. ID: [ID]"
+        },
+        {
+          "titulo": "Alarme Falso / Pânico Social",
+          "mensagem": "Incitamento ao Pânico: Notícias falsas sobre tragédias, desastres ou ameaças inexistentes para gerar comoção. Peço bloqueio do post. ID: [ID]"
+        },
+        {
+          "titulo": "Fraude Financeira por Notícia Falsa",
+          "mensagem": "Manipulação do Mercado por Boato: Criação de mentiras sobre falência de empresas ou valorização para aplicar golpes. ID: [ID]"
+        },
+        {
+          "titulo": "Descontextualização de Vídeos Antigos",
+          "mensagem": "Vídeo Fora de Contexto: Republicação de gravações antigas afirmando se tratar de eventos recentes para enganar seguidores. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Checagem de Fatos",
+          "mensagem": "Conta Repositório de Fake News: Perfil dedicado exclusivamente à postagem de conteúdos enganosos desprovidos de checagem. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "ORGANIZAÇÕES CRIMINOSAS",
+      "itens": [
+        {
+          "titulo": "Apologia ao Criminosismo",
+          "mensagem": "Associação Criminosa: Perfil que promove, recruta ou faz exaltação de facções e organizações criminosas. Solicito banimento imediato. ID: [ID]"
+        },
+        {
+          "titulo": "Recrutamento para Ilícitos",
+          "mensagem": "Recrutamento Criminoso: A conta utiliza a rede para atrair pessoas a participarem de atividades de grupos ilegais. Peço bloqueio urgente. ID: [ID]"
+        },
+        {
+          "titulo": "Comércio de Drogas / Substâncias",
+          "mensagem": "Venda de Substâncias Ilícitas: O perfil é utilizado como catálogo e ponto de venda de entorpecentes e drogas restritas. ID: [ID]"
+        },
+        {
+          "titulo": "Tráfico e Mercadorias Proibidas",
+          "mensagem": "Venda de Produtos Ilegais: Publicação oferecendo contrabando, receptação de roubo ou órgãos/itens proibidos por lei. ID: [ID]"
+        },
+        {
+          "titulo": "Ostentação de Facção Criminosa",
+          "mensagem": "Símbolos de Facções: Exibição de siglas, gestos e materiais em alusão direta a grupos armados à margem da lei. Peço desativação. ID: [ID]"
+        },
+        {
+          "titulo": "Terrorismo / Extremismo",
+          "mensagem": "Incentivo ao Terrorismo: Publicações incentivando ou planejando atos extremistas e violentos de grande escala. Solicito aviso às autoridades. ID: [ID]"
+        },
+        {
+          "titulo": "Coação e Cobrança Ilegal",
+          "mensagem": "Extorção por Organização: Uso da plataforma para ameaçar e cobrar 'taxas' de usuários em áreas dominadas. Solicito exclusão. ID: [ID]"
+        },
+        {
+          "titulo": "Facilitamento de Fugas / Crimes",
+          "mensagem": "Instruções Criminosas: Publicação de tutoriais de como burlar a polícia, fugas ou cometer roubos. Peço remoção imediata da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Lavagem de Dinheiro / Contas Laranjas",
+          "mensagem": "Aluguel de Contas para Crime: Perfil focado na compra/aluguel de dados para intermediar movimentações ilícitas. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Intervenção Policial/Moderação",
+          "mensagem": "Perfil de Apoio Criminoso: Uso explícito da conta para coordenação e apoio a ações ilícitas graves. Peço o banimento definitivo. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "VIOLAÇÃO DE TERMOS GERAIS",
+      "itens": [
+        {
+          "titulo": "Descumprimento dos Termos",
+          "mensagem": "Infração Genérica: O perfil acumula diversos descumprimentos pequenos das Regras da Comunidade do aplicativo. Solicito análise do ID. ID: [ID]"
+        },
+        {
+          "titulo": "Comportamento Incompatível",
+          "mensagem": "Conduta Inadequada: A conta apresenta postagens constantes em desalinho com o padrão amigável da rede. Peço providências. ID: [ID]"
+        },
+        {
+          "titulo": "Subversão de Punições Anteriores",
+          "mensagem": "Burlar Evasão de Banimento: Usuário criou nova conta para continuar praticando infrações após ter sido banido anteriormente. ID: [ID]"
+        },
+        {
+          "titulo": "Nome de Usuário Inapropriado",
+          "mensagem": "Nick Ofensivo: O nome de usuário (@) e o nome exibido contêm termos de baixo calão ou ofensas. Solicito alteração obrigatoria ou bloqueio. ID: [ID]"
+        },
+        {
+          "titulo": "Bio Inapropriada",
+          "mensagem": "Biografia Cobre Regras: A descrição do perfil contém links suspeitos, palavrões ou ofensas direcionadas. Peço intervenção. ID: [ID]"
+        },
+        {
+          "titulo": "Foto de Perfil Inadequada",
+          "mensagem": "Avatar Ofensivo: A imagem de perfil do usuário exibe conteúdo sensível, chocante ou desrespeitoso. Solicito a remoção da imagem. ID: [ID]"
+        },
+        {
+          "titulo": "Uso Comercial Não Autorizado",
+          "mensagem": "Uso Comercial Indevido: Conta pessoal realizando propaganda massiva desrespeitando os termos de contas de negócios. ID: [ID]"
+        },
+        {
+          "titulo": "Tentativa de Burlar Moderação",
+          "mensagem": "Uso de 'L33t Speak' para Ofensas: Digitação de ofensas trocando letras por números para enganar os filtros automáticos da rede. ID: [ID]"
+        },
+        {
+          "titulo": "Abuso do Sistema de Denúncias",
+          "mensagem": "Denúncia Falsa em Massa: O perfil utiliza a ferramenta de report de forma maliciosa para derrubar contas idôneas. Peço sanção. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Revisão de ID",
+          "mensagem": "Revisão Geral do Perfil: Conta com histórico de alertas e reportes recorrentes por má conduta geral. Peço suspensão preventiva. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "INVASÃO E HACKING",
+      "itens": [
+        {
+          "titulo": "Divulgação de Ferramentas Hack",
+          "mensagem": "Denúncia de Hacking: O perfil vende e compartilha ferramentas para invasão de contas e dispositivos. Solicito desativação urgente. ID: [ID]"
+        },
+        {
+          "titulo": "Venda de Contas Roubadas",
+          "mensagem": "Comércio Ilegal de Acessos: A conta publica ofertas de credenciais e logins roubados de plataformas e redes. Peço banimento. ID: [ID]"
+        },
+        {
+          "titulo": "Tutorial de Engenharia Social",
+          "mensagem": "Ensinamento de Golpes de Acesso: O usuário publica instruções de como enganar pessoas para roubar códigos de SMS e WhatsApp. ID: [ID]"
+        },
+        {
+          "titulo": "Divulgação de Malwares / Vírus",
+          "mensagem": "Distribuição de Arquivos Nocivos: Disponibilização de links para download de cavalos de troia, spyware e vírus. Solicito exclusão. ID: [ID]"
+        },
+        {
+          "titulo": "Painel de Consultas Ilegal",
+          "mensagem": "Oferta de Painéis de Busca: Perfil vendendo acesso a sistemas ilegais de puxada de dados de cidadãos. Peço providências imediatas. ID: [ID]"
+        },
+        {
+          "titulo": "Ataques DDoS / Queda de Redes",
+          "mensagem": "Oferta de Ataques de Redes: O usuário oferece serviços de derrubada de conexões e sites (DDoS). Solicito bloqueio do perfil. ID: [ID]"
+        },
+        {
+          "titulo": "Invasão de Transmissão (Ao Vivo)",
+          "mensagem": "Invasão de Lives: Conta utilizada para invadir e colocar conteúdos impróprios nas transmissões de outros usuários. Peço suspensão. ID: [ID]"
+        },
+        {
+          "titulo": "Burlar Verificação de Segurança",
+          "mensagem": "Bypass de Segurança: Publicação demonstrando formas de burlar autenticações de dois fatores (2FA). Solicito moderação. ID: [ID]"
+        },
+        {
+          "titulo": "Chantagem por Invasão",
+          "mensagem": "Ransomware / Chantagem: Perfil exigindo resgate financeiro para devolver o acesso de contas invadidas. Peço banimento urgente. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Exclusão (Hacking)",
+          "mensagem": "Atividade Cibernética Nociva: Conta operando exclusivamente na promoção e venda de métodos de cibersegurança ilegal. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "INCENTIVO A JOGOS DE AZAR",
+      "itens": [
+        {
+          "titulo": "Divulgação de Jogos Ilícitos",
+          "mensagem": "Denúncia de Jogos Não Regulamentados: O perfil divulga plataformas e 'plataformas pagando' de jogos de azar ilegais. Solicito remoção. ID: [ID]"
+        },
+        {
+          "titulo": "Uso de Contas Demo Enganosas",
+          "mensagem": "Fraude de Cassino Online: O usuário finge ganhos altos com contas demonstrativas para enganar o público e vender links. ID: [ID]"
+        },
+        {
+          "titulo": "Divulgação para Menores",
+          "mensagem": "Jogos de Azar direcionados a Menores: Promoção de cassinos virtuais e apostas em vídeos cujo público principal são crianças/jovens. ID: [ID]"
+        },
+        {
+          "titulo": "Robôs de Sinais / Apostas",
+          "mensagem": "Venda de Falsos Robôs de Apostas: Comercialização de 'robôs de sinais' com a promessa enganosa de acerto de 100% em apostas. ID: [ID]"
+        },
+        {
+          "titulo": "Spam de Links de Afiliados de Cassino",
+          "mensagem": "Spam de Afiliados: Envio massivo de links de indicação para cassinos não regulados em comentários de postagens alheias. ID: [ID]"
+        },
+        {
+          "titulo": "Desafios Envolvendo Apostas de Dinheiro",
+          "mensagem": "Incentivo ao Endividamento: Perfis promovendo apostas financeiras desmedidas como estilo de vida fácil. Solicito moderação. ID: [ID]"
+        },
+        {
+          "titulo": "Burlar Legislação Local de Apostas",
+          "mensagem": "Divulgação de Apostas Proibidas: Ensinar meios de usar VPN para acessar cassinos bloqueados no país. Peço suspensão. ID: [ID]"
+        },
+        {
+          "titulo": "Falsos Esquetes de Ganhos em Apostas",
+          "mensagem": "Encenação Enganosa de Apostas: Gravação de vídeos teatrais simulando riqueza adquirida via jogos de azar virtuais. ID: [ID]"
+        },
+        {
+          "titulo": "Cobrança para Entrar em Grupos de Sinais",
+          "mensagem": "Esquema de Grupo VIP de Apostas: Cobrança de mensalidades para participação em grupos que não cumprem o prometido. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Bloqueio (Cassinos)",
+          "mensagem": "Atividade de Promoção de Azar: Perfil desrespeitando as diretrizes contra a veiculação de apostas não autorizadas. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "EXPOSIÇÃO DE ANIMAIS E MAUS-TRATOS",
+      "itens": [
+        {
+          "titulo": "Maus-Tratos a Animais",
+          "mensagem": "Crueldade Animal: O perfil veicula cenas claras de agressão, privação e maus-tratos a animais. Solicito banimento imediato e denúncia. ID: [ID]"
+        },
+        {
+          "titulo": "Rixas / Lutas de Animais",
+          "mensagem": "Rixa de Animais: A conta promove e transmite combates organizados e violentos entre animais. Peço remoção urgente da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Venda Ilegal de Animais Silvestres",
+          "mensagem": "Tráfico de Animais: Publicação oferecendo a comercialização não autorizada de espécimes da fauna silvestre ou ameaçados. ID: [ID]"
+        },
+        {
+          "titulo": "Caça Ilegal e Abate",
+          "mensagem": "Caça Clandestina: Exibição de abate e caça predatória de animais sem licença e de forma cruel. Solicito suspensão da conta. ID: [ID]"
+        },
+        {
+          "titulo": "Humilhação / Desafios com Pet",
+          "mensagem": "Uso de Animais para Riscos: Submeter pets a situações de estresse extremo ou substâncias nocivas para gerar visualizações. ID: [ID]"
+        },
+        {
+          "titulo": "Abandono de Animais Gravado",
+          "mensagem": "Gravação de Abandono: Vídeo gravado exibindo o abandono de animais em vias públicas. Peço remoção do post e sanção ao perfil. ID: [ID]"
+        },
+        {
+          "titulo": "Incentivo à Violência Contra Pets",
+          "mensagem": "Incitamento ao Mal com Animais: Falas e conteúdos encorajando o envenenamento ou agressão a animais de rua. Peço banimento. ID: [ID]"
+        },
+        {
+          "titulo": "Criação Clandestina / Exploração",
+          "mensagem": "Exploração Animal Cruel: Exibição de criadouros em condições insalubres para exploração comercial ilícita. ID: [ID]"
+        },
+        {
+          "titulo": "Uso de Produtos Nocivos em Animais",
+          "mensagem": "Aplicação de Danos em Animais: Vídeos aplicando tintas, produtos químicos ou objetos dolorosos em corpos de animais. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Banimento (Crueldade Animal)",
+          "mensagem": "Violência Grave Contra Animais: Conta em total desacordo com as diretrizes morais e legais da rede. Solicito desativação. ID: [ID]"
+        }
+      ]
+    },
+    {
+      "nome": "IMAGENS IMPRÓPRIAS E DEPRECATIVAS",
+      "itens": [
+        {
+          "titulo": "Uso de Fotos de Cadáveres / Tragédias",
+          "mensagem": "Conteúdo Sensível Chocante: Publicação de imagens de acidentes fatais, corpos ou necropsia sem desfoque. Solicito exclusão. ID: [ID]"
+        },
+        {
+          "titulo": "Zombaria com Pessoas Falecidas",
+          "mensagem": "Desrespeito a Falecidos: Publicações zombando de tragédias recém-ocorridas ou fotos de velórios com fins ofensivos. ID: [ID]"
+        },
+        {
+          "titulo": "Exibição de Doenças Extremas / Mutilação",
+          "mensagem": "Mídia Graficamente Chocante: Exibição de quadros médicos graves de forma sensacionalista para causar repulsa no público. ID: [ID]"
+        },
+        {
+          "titulo": "Gravações de Momentos de Pânico",
+          "mensagem": "Exposição de Vítimas de Crimes: Gravação aproximada do sofrimento de vítimas durante assaltos ou tragédias naturais. ID: [ID]"
+        },
+        {
+          "titulo": "Vazamento de Imagens Íntimas Pós-Morte",
+          "mensagem": "Infração Grave de Respeito: Divulgação de dados ou mídias sensíveis de pessoas falecidas. Solicito imediato banimento. ID: [ID]"
+        },
+        {
+          "titulo": "Uso de Gore / Horror Extremo",
+          "mensagem": "Publicação de Gore: Perfil focado na disseminação de arquivos de horror real e mutilações corporais no feed da rede. ID: [ID]"
+        },
+        {
+          "titulo": "Vídeos de Humilhação de Pessoas em Situação de Rua",
+          "mensagem": "Exposição de Vulneráveis: Gravação de abordagens desrespeitosas e brincadeiras de mau gosto com vulneráveis. ID: [ID]"
+        },
+        {
+          "titulo": "Ataques Visuais Desenhados / Gore Artístico",
+          "mensagem": "Artes Perturbadoras Explicitas: Publicação de ilustrações visando provocar ansiedade, horror e perturbação visual. ID: [ID]"
+        },
+        {
+          "titulo": "Exibição de Substâncias Nojentas / Repulsivas",
+          "mensagem": "Mídia Repulsiva: Vídeos contendo dejetos ou fluidos corporais com intenção de causar nojo e contaminação do feed. ID: [ID]"
+        },
+        {
+          "titulo": "Solicitação de Moderação (Imagens Chocantes)",
+          "mensagem": "Feed Contaminado por Imagens Chocantes: Conta violando a regra de segurança visual dos usuários. Solicito remoção imediata. ID: [ID]"
         }
       ]
     }
