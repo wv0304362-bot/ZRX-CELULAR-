@@ -6,28 +6,27 @@
   <title>Painel Métodos Kwai</title>
   <style>
     :root {
-      --bg-dark: #0f1115;          /* Preto carvão elegante */
-      --bg-card: #181c24;          /* Cinza escuro para os blocos */
-      --bg-input: #101217;         /* Preto fosco para inputs */
-      --accent: #ff0055;           /* Rosa choque padrão */
-      --accent-neon: #00f0ff;      /* Azul neon de destaque */
-      --text-main: #f1f5f9;        /* Texto principal claro */
-      --text-muted: #8b949e;       /* Cinza claro secundário */
-      --border-color: #2b313b;     /* Borda sutil cinza */
+      --bg-dark: #0a0c10;          /* Preto absoluto refinado */
+      --bg-card: #14171f;          /* Cinza chumbo escuro para blocos */
+      --bg-input: #0d0f14;         /* Preto fosco para inputs */
+      --silver: #c0c5ce;           /* Prateado principal */
+      --silver-light: #e6ebf5;     /* Prateado claro para destaques */
+      --silver-dark: #7a8291;      /* Cinza prateado secundário */
+      --border-color: #222732;     /* Borda sutil chumbo/prateada */
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     
     body { 
       background-color: var(--bg-dark); 
-      color: var(--text-main); 
+      color: var(--silver); 
       padding: 15px; 
       padding-bottom: 40px; 
     }
 
     header { text-align: center; margin-bottom: 25px; }
-    header h1 { font-size: 1.5rem; color: #fff; text-shadow: 0 0 10px rgba(255,0,85,0.4); }
-    header p { color: var(--text-muted); font-size: 0.85rem; }
+    header h1 { font-size: 1.5rem; color: #fff; letter-spacing: 1px; text-shadow: 0 0 10px rgba(192, 197, 206, 0.2); }
+    header p { color: var(--silver-dark); font-size: 0.85rem; }
 
     /* Controle de Telas e Subtelas */
     .screen { display: none; }
@@ -39,19 +38,19 @@
       border-radius: 12px;
       padding: 18px;
       margin-bottom: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
 
     .card h2 {
       font-size: 1.1rem;
       margin-bottom: 15px;
-      color: var(--accent-neon);
+      color: var(--silver-light);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
-    /* Estilo de Botões em Lista Vertical com Emojis */
+    /* Estilo de Botões em Lista Vertical */
     .menu-list {
       display: flex;
       flex-direction: column;
@@ -60,11 +59,11 @@
 
     .menu-btn {
       width: 100%;
-      background: linear-gradient(135deg, #181c24, #12151c);
+      background: linear-gradient(135deg, #161a23, #0f1117);
       border: 1px solid var(--border-color);
       border-radius: 10px;
       padding: 16px;
-      color: var(--text-main);
+      color: var(--silver-light);
       font-size: 0.95rem;
       font-weight: 600;
       display: flex;
@@ -72,29 +71,31 @@
       justify-content: space-between;
       cursor: pointer;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
     }
 
     .menu-btn:hover {
-      border-color: var(--accent-neon);
-      background: linear-gradient(135deg, #1f2430, #141820);
+      border-color: var(--silver);
+      background: linear-gradient(135deg, #1c212c, #131720);
     }
 
     .menu-btn span {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
-    .menu-btn .emoji {
-      font-size: 1.3rem;
+    .menu-btn svg, .card h2 svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--silver);
     }
 
     /* Botão de Voltar */
     .btn-voltar {
       background: transparent;
-      border: 1px solid var(--text-muted);
-      color: var(--text-muted);
+      border: 1px solid var(--silver-dark);
+      color: var(--silver-dark);
       padding: 8px 14px;
       border-radius: 8px;
       font-size: 0.85rem;
@@ -105,24 +106,24 @@
       gap: 6px;
     }
     .btn-voltar:hover {
-      border-color: var(--text-main);
-      color: var(--text-main);
+      border-color: var(--silver-light);
+      color: var(--silver-light);
     }
 
     /* Listagem de itens dinâmicos */
     .item-card {
-      background: rgba(0, 0, 0, 0.25);
+      background: rgba(0, 0, 0, 0.3);
       border: 1px solid var(--border-color);
       border-radius: 10px;
       padding: 14px;
       margin-bottom: 12px;
     }
     .item-card h3 { font-size: 0.95rem; color: #fff; margin-bottom: 6px; }
-    .item-card p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; }
+    .item-card p { font-size: 0.82rem; color: var(--silver-dark); margin-bottom: 10px; }
 
     /* Formulários */
     .form-group { margin-bottom: 12px; }
-    .form-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; }
+    .form-group label { display: block; font-size: 0.8rem; color: var(--silver-dark); margin-bottom: 4px; }
     input, textarea, select {
       width: 100%;
       background: var(--bg-input);
@@ -133,7 +134,7 @@
       font-size: 0.85rem;
       outline: none;
     }
-    input:focus, textarea:focus { border-color: var(--accent-neon); }
+    input:focus, textarea:focus { border-color: var(--silver); }
     textarea { resize: vertical; min-height: 70px; }
 
     .mode-switch {
@@ -150,33 +151,37 @@
       padding: 8px;
       border: none;
       background: transparent;
-      color: var(--text-muted);
+      color: var(--silver-dark);
       border-radius: 6px;
       cursor: pointer;
       font-weight: bold;
       font-size: 0.85rem;
     }
-    .mode-btn.active { background: var(--accent); color: #fff; }
+    .mode-btn.active { background: #2b313b; color: #fff; }
 
     .btn {
       width: 100%;
       padding: 10px;
       border: none;
       border-radius: 8px;
-      background: linear-gradient(135deg, var(--accent), #b3003b);
+      background: linear-gradient(135deg, #2b313b, #181c24);
+      border: 1px solid var(--silver-dark);
       color: #fff;
       font-weight: bold;
       cursor: pointer;
       font-size: 0.9rem;
-      box-shadow: 0 2px 10px rgba(255, 0, 85, 0.3);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
     }
+    .btn:hover { border-color: var(--silver-light); }
+
     .btn-secondary {
       background: transparent;
-      border: 1px solid var(--accent-neon);
-      color: var(--accent-neon);
+      border: 1px solid var(--silver);
+      color: var(--silver-light);
       margin-top: 5px;
       box-shadow: none;
     }
+    .btn-secondary:hover { background: rgba(192, 197, 206, 0.1); }
 
     .status-badge {
       display: inline-block;
@@ -186,9 +191,9 @@
       font-size: 0.8rem;
       margin-top: 10px;
     }
-    .status-green { background: rgba(0, 255, 136, 0.15); color: #00ff88; border: 1px solid #00ff88; }
-    .status-red { background: rgba(255, 0, 85, 0.15); color: #ff0055; border: 1px solid #ff0055; }
-    .status-none { background: rgba(255,255,255,0.05); color: var(--text-muted); }
+    .status-green { background: rgba(192, 197, 206, 0.1); color: var(--silver-light); border: 1px solid var(--silver); }
+    .status-red { background: rgba(122, 130, 145, 0.15); color: var(--silver-dark); border: 1px solid var(--silver-dark); }
+    .status-none { background: rgba(255,255,255,0.05); color: var(--silver-dark); }
 
     .preview-container {
       margin-top: 10px;
@@ -203,7 +208,7 @@
     }
 
     .hidden { display: none; }
-    .counter { font-size: 0.75rem; color: var(--accent-neon); margin-top: 3px; }
+    .counter { font-size: 0.75rem; color: var(--silver); margin-top: 3px; }
   </style>
 </head>
 <body>
@@ -216,26 +221,44 @@
   <!-- ================= TELA PRINCIPAL (MENU DE BOTÕES VERTICAIS) ================= -->
   <div id="screen-main" class="screen active">
     <div class="card">
-      <h2>📌 Menu Principal</h2>
+      <h2>
+        <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+        Menu Principal
+      </h2>
       <div class="menu-list">
         <button class="menu-btn" onclick="mudarTela('screen-tickets')">
-          <span><span class="emoji">🎫</span> Textos para Tickets (Kwai)</span>
+          <span>
+            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+            Textos para Tickets (Kwai)
+          </span>
           <span>➔</span>
         </button>
         <button class="menu-btn" onclick="mudarTela('screen-email-auto')">
-          <span><span class="emoji">⚡</span> E-mail Automático (Disparos em Massa)</span>
+          <span>
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            E-mail Automático (Disparos em Massa)
+          </span>
           <span>➔</span>
         </button>
         <button class="menu-btn" onclick="mudarTela('screen-email-manual')">
-          <span><span class="emoji">✍️</span> E-mail Manual (Individual)</span>
+          <span>
+            <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+            E-mail Manual (Individual)
+          </span>
           <span>➔</span>
         </button>
         <button class="menu-btn" onclick="mudarTela('screen-email-modelos')">
-          <span><span class="emoji">📂</span> Modelos de E-mail por Categoria</span>
+          <span>
+            <svg viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+            Modelos de E-mail por Categoria
+          </span>
           <span>➔</span>
         </button>
         <button class="menu-btn" onclick="mudarTela('screen-analise')">
-          <span><span class="emoji">🔍</span> Análise Inteligente (OpenAI Vision)</span>
+          <span>
+            <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            Análise Inteligente (OpenAI Vision)
+          </span>
           <span>➔</span>
         </button>
       </div>
@@ -246,7 +269,10 @@
   <div id="screen-tickets" class="screen">
     <div class="card">
       <button class="btn-voltar" onclick="mudarTela('screen-main')">⬅ Voltar ao Menu</button>
-      <h2>🎫 Categorias de Tickets</h2>
+      <h2>
+        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+        Categorias de Tickets
+      </h2>
       
       <!-- Lista de categorias de tickets -->
       <div id="ticketsCategoryList" class="menu-list"></div>
@@ -254,7 +280,7 @@
       <!-- Subtela de itens do ticket -->
       <div id="tickets-items-view" class="hidden" style="margin-top: 15px;">
         <button class="btn-voltar" onclick="voltarCategoriasTickets()">⬅ Voltar às Categorias</button>
-        <h3 id="ticketsSubTitle" style="color: var(--accent-neon); margin-bottom: 12px; font-size: 1rem;"></h3>
+        <h3 id="ticketsSubTitle" style="color: var(--silver-light); margin-bottom: 12px; font-size: 1rem;"></h3>
         
         <div class="form-group" style="margin-bottom: 15px;">
           <label>ID da Pessoa Denunciada (Opcional):</label>
@@ -270,7 +296,10 @@
   <div id="screen-email-auto" class="screen">
     <div class="card">
       <button class="btn-voltar" onclick="mudarTela('screen-main')">⬅ Voltar ao Menu</button>
-      <h2>⚡ Configurar E-mail Automático</h2>
+      <h2>
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        Configurar E-mail Automático
+      </h2>
       
       <div class="form-group">
         <label>ID da Pessoa Denunciada (Alvo):</label>
@@ -301,7 +330,10 @@
   <div id="screen-email-manual" class="screen">
     <div class="card">
       <button class="btn-voltar" onclick="mudarTela('screen-main')">⬅ Voltar ao Menu</button>
-      <h2>✍️ Configurar E-mail Manual</h2>
+      <h2>
+        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+        Configurar E-mail Manual
+      </h2>
       
       <div class="form-group">
         <label>ID da Pessoa Denunciada (Alvo):</label>
@@ -331,7 +363,10 @@
   <div id="screen-email-modelos" class="screen">
     <div class="card">
       <button class="btn-voltar" onclick="mudarTela('screen-main')">⬅ Voltar ao Menu</button>
-      <h2>📂 Categorias de Modelos de E-mail</h2>
+      <h2>
+        <svg viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+        Categorias de Modelos de E-mail
+      </h2>
       
       <!-- Lista de categorias de e-mail -->
       <div id="emailsCategoryList" class="menu-list"></div>
@@ -339,7 +374,7 @@
       <!-- Subtela de itens do e-mail -->
       <div id="emails-items-view" class="hidden" style="margin-top: 15px;">
         <button class="btn-voltar" onclick="voltarCategoriasEmails()">⬅ Voltar às Categorias</button>
-        <h3 id="emailsSubTitle" style="color: var(--accent-neon); margin-bottom: 12px; font-size: 1rem;"></h3>
+        <h3 id="emailsSubTitle" style="color: var(--silver-light); margin-bottom: 12px; font-size: 1rem;"></h3>
         <div id="emailsItemList"></div>
       </div>
     </div>
@@ -349,7 +384,10 @@
   <div id="screen-analise" class="screen">
     <div class="card">
       <button class="btn-voltar" onclick="mudarTela('screen-main')">⬅ Voltar ao Menu</button>
-      <h2>🔍 Análise Inteligente (OpenAI Vision)</h2>
+      <h2>
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        Análise Inteligente (OpenAI Vision)
+      </h2>
       
       <div class="form-group">
         <label>Chave da API OpenAI:</label>
@@ -368,14 +406,16 @@
       <button class="btn" style="margin-top: 12px;" onclick="analisarComOpenAI()">Analisar com IA (OpenAI)</button>
       
       <div id="statusArea" class="status-badge status-none">Aguardando envio de arquivo...</div>
-      <p id="analysisDetail" style="font-size: 0.8rem; margin-top: 8px; color: var(--text-muted);"></p>
+      <p id="analysisDetail" style="font-size: 0.8rem; margin-top: 8px; color: var(--silver-dark);"></p>
     </div>
   </div>
 
   <script>
     let dadosTickets = { categorias: [] };
     let dadosEmails = { categorias: [] };
-    const emojisCategorias = ["🛡️", "⚠️", "🚨", "📌", "⚙️", "🔥", "⚡", "📋"];
+
+    // SVGs desenhados para substituir emojis nas categorias
+    const svgIconeCategoria = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:var(--silver);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>';
 
     async function carregarDados() {
       try {
@@ -398,16 +438,15 @@
       window.scrollTo(0, 0);
     }
 
-    // --- RENDERIZAÇÃO DE TICKETS ---
+    // --- RENDERIZAÇÃO DE TICKETS (Apenas dados de tickets.json) ---
     function renderizarMenuTickets() {
       const container = document.getElementById('ticketsCategoryList');
       container.innerHTML = '';
       
-      dadosTickets.categorias.forEach((cat, index) => {
-        const emoji = emojisCategorias[index % emojisCategorias.length];
+      dadosTickets.categorias.forEach((cat) => {
         const btn = document.createElement('button');
         btn.className = 'menu-btn';
-        btn.innerHTML = `<span><span class="emoji">${emoji}</span> ${cat.nome}</span><span>➔</span>`;
+        btn.innerHTML = `<span>${svgIconeCategoria} ${cat.nome}</span><span>➔</span>`;
         btn.onclick = () => abrirCategoriaTicket(cat);
         container.appendChild(btn);
       });
@@ -438,16 +477,15 @@
       document.getElementById('ticketsCategoryList').classList.remove('hidden');
     }
 
-    // --- RENDERIZAÇÃO DE MODELOS DE E-MAIL ---
+    // --- RENDERIZAÇÃO DE MODELOS DE E-MAIL (Apenas dados de emails.json) ---
     function renderizarMenuEmailsModelos() {
       const container = document.getElementById('emailsCategoryList');
       container.innerHTML = '';
 
-      dadosEmails.categorias.forEach((cat, index) => {
-        const emoji = emojisCategorias[index % emojisCategorias.length];
+      dadosEmails.categorias.forEach((cat) => {
         const btn = document.createElement('button');
         btn.className = 'menu-btn';
-        btn.innerHTML = `<span><span class="emoji">${emoji}</span> ${cat.nome}</span><span>➔</span>`;
+        btn.innerHTML = `<span>${svgIconeCategoria} ${cat.nome}</span><span>➔</span>`;
         btn.onclick = () => abrirCategoriaEmail(cat);
         container.appendChild(btn);
       });
@@ -485,8 +523,8 @@
       navigator.clipboard.writeText(textoFinal).then(() => {
         const originalText = botao.innerText;
         botao.innerText = 'Copiado!';
-        botao.style.borderColor = '#00ff88';
-        botao.style.color = '#00ff88';
+        botao.style.borderColor = 'var(--silver-light)';
+        botao.style.color = 'var(--silver-light)';
         setTimeout(() => {
           botao.innerText = originalText;
           botao.style.borderColor = '';
@@ -575,15 +613,15 @@
         const respostaIA = data.choices[0].message.content;
         if (respostaIA.includes("VERMELHO")) {
           statusArea.className = 'status-badge status-red';
-          statusArea.innerText = '🔴 Status Vermelho: Violação Detectada';
+          statusArea.innerText = 'Status Vermelho: Violação Detectada';
         } else {
           statusArea.className = 'status-badge status-green';
-          statusArea.innerText = '🟢 Status Verde: Conta / Conteúdo Regular';
+          statusArea.innerText = 'Status Verde: Conta / Conteúdo Regular';
         }
         detail.innerText = respostaIA;
       } catch (error) {
         statusArea.className = 'status-badge status-red';
-        statusArea.innerText = '⚠️ Erro na Análise';
+        statusArea.innerText = 'Erro na Análise';
         detail.innerText = 'Erro ao conectar com a API: ' + error.message;
       }
     }
