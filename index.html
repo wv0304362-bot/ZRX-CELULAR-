@@ -29,8 +29,8 @@
     header h1 { font-size: 1.5rem; color: #fff; text-shadow: 0 0 10px rgba(255,0,85,0.4); }
     header p { color: var(--text-muted); font-size: 0.85rem; }
 
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
+    .tab-content, .sub-view { display: none; }
+    .tab-content.active, .sub-view.active { display: block; }
 
     .card {
       background: var(--bg-card);
@@ -50,28 +50,75 @@
       gap: 8px;
     }
 
-    /* Carrossel */
-    .carousel-container {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-      scroll-snap-type: x mandatory;
-    }
-    .carousel-item {
-      flex: 0 0 280px;
-      background: rgba(0, 0, 0, 0.2);
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      padding: 12px;
-      scroll-snap-align: start;
+    /* Estilo de Botões em Lista Vertical com Emojis */
+    .menu-list {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      gap: 12px;
     }
-    .carousel-item h3 { font-size: 0.95rem; color: #fff; margin-bottom: 6px; }
-    .carousel-item p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; }
-    
+
+    .menu-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #181c24, #12151c);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px 16px;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .menu-btn:hover {
+      border-color: var(--accent-neon);
+      background: linear-gradient(135deg, #1f2430, #141820);
+    }
+
+    .menu-btn span {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .menu-btn .emoji {
+      font-size: 1.2rem;
+    }
+
+    /* Botão de Voltar para Subtelas */
+    .btn-voltar {
+      background: transparent;
+      border: 1px solid var(--text-muted);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-bottom: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-voltar:hover {
+      border-color: var(--text-main);
+      color: var(--text-main);
+    }
+
+    /* Listagem de itens dinâmicos nas subtelas */
+    .item-card {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .item-card h3 { font-size: 0.95rem; color: #fff; margin-bottom: 6px; }
+    .item-card p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px; }
+
     /* Formulários */
     .form-group { margin-bottom: 12px; }
     .form-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; }
@@ -200,27 +247,138 @@
     <p>Gerenciador de Automação & Análise OpenAI Vision</p>
   </header>
 
-  <!-- ABA 1: TICKETS -->
+  <!-- ABA 1: TICKETS (LISTA DE CATEGORIAS EM BOTÕES VERTICAIS) -->
   <div id="tab-tickets" class="tab-content active">
     <div class="card">
-      <h2>🎫 Textos para Tickets (Direto no Kwai)</h2>
-      <div class="form-group" style="margin-bottom: 15px;">
-        <label>ID da Pessoa Denunciada (Opcional para incluir ao copiar):</label>
-        <input type="text" id="idAlvoTicket" placeholder="Ex: 987654321">
+      <h2>🎫 Textos para Tickets (Kwai)</h2>
+      
+      <!-- MENU PRINCIPAL DE TICKETS -->
+      <div id="tickets-main-menu" class="sub-view active">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Selecione uma categoria de ticket abaixo:</p>
+        <div class="menu-list" id="ticketsCategoryList">
+          <!-- Gerado dinâmico pelo JSON -->
+        </div>
       </div>
-      <div class="carousel-container" id="carouselTickets"></div>
+
+      <!-- SUBTELA DA CATEGORIA DE TICKET -->
+      <div id="tickets-sub-view" class="sub-view">
+        <button class="btn-voltar" onclick="voltarMenuTickets()">⬅ Voltar para Categorias</button>
+        <h3 id="ticketsSubTitle" style="color: var(--accent-neon); margin-bottom: 12px; font-size: 1rem;"></h3>
+        
+        <div class="form-group" style="margin-bottom: 15px;">
+          <label>ID da Pessoa Denunciada (Opcional):</label>
+          <input type="text" id="idAlvoTicket" placeholder="Ex: 987654321">
+        </div>
+        
+        <div id="ticketsItemList">
+          <!-- Itens da categoria selecionada -->
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <!-- ABA 2: E-MAILS -->
+  <!-- ABA 2: E-MAILS (LISTA DE OPÇÕES EM BOTÕES VERTICAIS) -->
   <div id="tab-emails" class="tab-content">
     <div class="card">
-      <h2>✉️ Textos para E-mail</h2>
-      <div class="carousel-container" id="carouselEmails"></div>
+      <h2>✉️ Central de E-mail & Envios</h2>
+      
+      <!-- MENU PRINCIPAL DE E-MAILS -->
+      <div id="emails-main-menu" class="sub-view active">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Escolha o modo de envio desejado:</p>
+        <div class="menu-list">
+          <button class="menu-btn" onclick="abrirSubEmail('automatico')">
+            <span><span class="emoji">⚡</span> E-mail Automático (Disparos em Massa)</span>
+            <span>➔</span>
+          </button>
+          <button class="menu-btn" onclick="abrirSubEmail('manual')">
+            <span><span class="emoji">✍️</span> E-mail Manual (Individual)</span>
+            <span>➔</span>
+          </button>
+          <button class="menu-btn" onclick="abrirSubEmail('modelos')">
+            <span><span class="emoji">📂</span> Modelos de Texto por Categoria</span>
+            <span>➔</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- SUBTELA: E-MAIL AUTOMÁTICO -->
+      <div id="sub-email-automatico" class="sub-view">
+        <button class="btn-voltar" onclick="voltarMenuEmails()">⬅ Voltar ao Menu</button>
+        <h3 style="color: var(--accent-neon); margin-bottom: 12px; font-size: 1rem;">⚡ Configurar E-mail Automático</h3>
+        
+        <div class="form-group">
+          <label>ID da Pessoa Denunciada (Alvo):</label>
+          <input type="text" id="idAlvoAuto" placeholder="Ex: 987654321">
+        </div>
+        <div class="form-group">
+          <label>Seu ID Kwai (Denunciante):</label>
+          <input type="text" id="meuIdAuto" placeholder="Ex: 15000987654">
+        </div>
+        <div class="form-group">
+          <label>Lista de E-mails Destino (um por linha):</label>
+          <textarea id="listaEmails" placeholder="suporte1@kwai.com&#10;suporte2@kwai.com"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Senhas de App carregadas (uma por linha):</label>
+          <textarea id="senhasApp" oninput="atualizarContadorSenhas()" placeholder="senha_app_1&#10;senha_app_2"></textarea>
+          <div class="counter" id="senhaCounter">Senhas de App detectadas: 0</div>
+        </div>
+        <div class="form-group">
+          <label>Quantidade de disparos:</label>
+          <input type="number" id="qtdEnviol" value="10">
+        </div>
+        <button class="btn" onclick="iniciarAutomacao()">Iniciar Automação</button>
+      </div>
+
+      <!-- SUBTELA: E-MAIL MANUAL -->
+      <div id="sub-email-manual" class="sub-view">
+        <button class="btn-voltar" onclick="voltarMenuEmails()">⬅ Voltar ao Menu</button>
+        <h3 style="color: var(--accent-neon); margin-bottom: 12px; font-size: 1rem;">✍️ Configurar E-mail Manual</h3>
+        
+        <div class="form-group">
+          <label>ID da Pessoa Denunciada (Alvo):</label>
+          <input type="text" id="idAlvoManual" placeholder="Ex: 987654321">
+        </div>
+        <div class="form-group">
+          <label>Seu ID Kwai (Denunciante):</label>
+          <input type="text" id="meuIdManual" placeholder="Ex: 15000987654">
+        </div>
+        <div class="form-group">
+          <label>Para (E-mail destino):</label>
+          <input type="email" id="paraManual" placeholder="suporte@kwai.com">
+        </div>
+        <div class="form-group">
+          <label>Assunto:</label>
+          <input type="text" id="assuntoManual" placeholder="Assunto da mensagem">
+        </div>
+        <div class="form-group">
+          <label>Mensagem:</label>
+          <textarea id="mensagemManual" placeholder="Texto preenchido..."></textarea>
+        </div>
+        <button class="btn" onclick="enviarManual()">Enviar E-mail</button>
+      </div>
+
+      <!-- SUBTELA: MODELOS DE TEXTO DE E-MAIL POR CATEGORIA -->
+      <div id="sub-email-modelos" class="sub-view">
+        <button class="btn-voltar" onclick="abrirSubEmail('menu')">⬅ Voltar ao Menu</button>
+        <h3 style="color: var(--accent-neon); margin-bottom: 12px; font-size: 1rem;">📂 Escolha a Categoria de E-mail</h3>
+        <div class="menu-list" id="emailsCategoryList">
+          <!-- Gerado dinâmico -->
+        </div>
+      </div>
+
+      <!-- SUBTELA DE ITENS DA CATEGORIA DE E-MAIL -->
+      <div id="sub-email-itens" class="sub-view">
+        <button class="btn-voltar" onclick="abrirSubEmail('modelos')">⬅ Voltar às Categorias</button>
+        <h3 id="emailsSubTitle" style="color: var(--accent-neon); margin-bottom: 12px; font-size: 1rem;"></h3>
+        <div id="emailsItemList"></div>
+      </div>
+
     </div>
   </div>
 
-  <!-- ABA 3: ANÁLISE DE PERFIL COM OPENAI -->
+  <!-- ABA 3: ANÁLISE DE PERFIL -->
   <div id="tab-analise" class="tab-content">
     <div class="card">
       <h2>🔍 Análise Inteligente (OpenAI Vision)</h2>
@@ -246,60 +404,6 @@
     </div>
   </div>
 
-  <!-- ABA 4: CENTRAL DE ENVIO -->
-  <div id="tab-envio" class="tab-content">
-    <div class="card">
-      <h2>🚀 Central de Envio de E-mail</h2>
-
-      <div class="form-group">
-        <label>ID da Pessoa Denunciada (Alvo):</label>
-        <input type="text" id="idAlvo" placeholder="Ex: 987654321">
-      </div>
-      <div class="form-group">
-        <label>Seu ID Kwai (Denunciante):</label>
-        <input type="text" id="meuId" placeholder="Ex: 15000987654">
-      </div>
-
-      <div class="mode-switch">
-        <button class="mode-btn active" id="btnManual" onclick="mudarModo('manual')">Manual</button>
-        <button class="mode-btn" id="btnAuto" onclick="mudarModo('auto')">Automático</button>
-      </div>
-
-      <div id="modoManual">
-        <div class="form-group">
-          <label>Para (E-mail destino):</label>
-          <input type="email" id="paraManual" placeholder="suporte@kwai.com">
-        </div>
-        <div class="form-group">
-          <label>Assunto:</label>
-          <input type="text" id="assuntoManual" placeholder="Assunto da mensagem">
-        </div>
-        <div class="form-group">
-          <label>Mensagem:</label>
-          <textarea id="mensagemManual" placeholder="Texto preenchido..."></textarea>
-        </div>
-        <button class="btn" onclick="enviarManual()">Enviar E-mail</button>
-      </div>
-
-      <div id="modoAuto" class="hidden">
-        <div class="form-group">
-          <label>Lista de E-mails Destino (um por linha):</label>
-          <textarea id="listaEmails" placeholder="suporte1@kwai.com&#10;suporte2@kwai.com"></textarea>
-        </div>
-        <div class="form-group">
-          <label>Senhas de App carregadas (uma por linha):</label>
-          <textarea id="senhasApp" oninput="atualizarContadorSenhas()" placeholder="senha_app_1&#10;senha_app_2"></textarea>
-          <div class="counter" id="senhaCounter">Senhas de App detectadas: 0</div>
-        </div>
-        <div class="form-group">
-          <label>Quantidade de disparos:</label>
-          <input type="number" id="qtdEnviol" value="10">
-        </div>
-        <button class="btn" onclick="iniciarAutomacao()">Iniciar Automação</button>
-      </div>
-    </div>
-  </div>
-
   <!-- BARRA DE NAVEGAÇÃO INFERIOR -->
   <nav class="bottom-nav">
     <button class="nav-item active" onclick="trocarAba('tickets', this)">
@@ -314,62 +418,122 @@
       <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
       Análise
     </button>
-    <button class="nav-item" onclick="trocarAba('envio', this)">
-      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-      Envio
-    </button>
   </nav>
 
   <script>
+    let dadosTickets = { categorias: [] };
+    let dadosEmails = { categorias: [] };
+
+    const emojisCategorias = ["🛡️", "⚠️", "🚨", "📌", "⚙️", "🔥", "⚡", "📋"];
+
     async function carregarDados() {
       try {
         const resTickets = await fetch('tickets.json');
-        const dataTickets = await resTickets.json();
-        renderizarCarouselTickets('carouselTickets', dataTickets);
+        dadosTickets = await resTickets.json();
+        renderizarMenuTickets();
 
         const resEmails = await fetch('emails.json');
-        const dataEmails = await resEmails.json();
-        renderizarCarouselEmails('carouselEmails', dataEmails);
+        dadosEmails = await resEmails.json();
+        renderizarMenuEmailsModelos();
       } catch (err) {
         console.error("Erro ao carregar os arquivos JSON:", err);
       }
     }
 
-    function renderizarCarouselTickets(elementId, banco) {
-      const container = document.getElementById(elementId);
+    // --- MENU E SUBTELAS DE TICKETS ---
+    function renderizarMenuTickets() {
+      const container = document.getElementById('ticketsCategoryList');
       container.innerHTML = '';
-      banco.categorias.forEach(cat => {
-        cat.itens.forEach(item => {
-          const div = document.createElement('div');
-          div.className = 'carousel-item';
-          div.innerHTML = `
-            <div>
-              <h3>${item.titulo}</h3>
-              <p>${item.mensagem}</p>
-            </div>
-            <button class="btn btn-secondary" onclick="copiarTicket(\`${item.mensagem}\`, this)">Copiar para o Kwai</button>
-          `;
-          container.appendChild(div);
-        });
+      
+      dadosTickets.categorias.forEach((cat, index) => {
+        const emoji = emojisCategorias[index % emojisCategorias.length];
+        const btn = document.createElement('button');
+        btn.className = 'menu-btn';
+        btn.innerHTML = `<span><span class="emoji">${emoji}</span> ${cat.nome}</span><span>➔</span>`;
+        btn.onclick = () => abrirCategoriaTicket(cat);
+        container.appendChild(btn);
       });
     }
 
-    function renderizarCarouselEmails(elementId, banco) {
-      const container = document.getElementById(elementId);
+    function abrirCategoriaTicket(cat) {
+      document.getElementById('tickets-main-menu').classList.remove('active');
+      document.getElementById('tickets-sub-view').classList.add('active');
+      document.getElementById('ticketsSubTitle').innerText = cat.nome;
+
+      const itemContainer = document.getElementById('ticketsItemList');
+      itemContainer.innerHTML = '';
+
+      cat.itens.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'item-card';
+        div.innerHTML = `
+          <h3>${item.titulo}</h3>
+          <p>${item.mensagem}</p>
+          <button class="btn btn-secondary" onclick="copiarTicket(\`${item.mensagem}\`, this)">Copiar para o Kwai</button>
+        `;
+        itemContainer.appendChild(div);
+      });
+    }
+
+    function voltarMenuTickets() {
+      document.getElementById('tickets-sub-view').classList.remove('active');
+      document.getElementById('tickets-main-menu').classList.add('active');
+    }
+
+    // --- MENU E SUBTELAS DE E-MAILS ---
+    function abrirSubEmail(tipo) {
+      document.getElementById('emails-main-menu').classList.remove('active');
+      document.getElementById('sub-email-automatico').classList.remove('active');
+      document.getElementById('sub-email-manual').classList.remove('active');
+      document.getElementById('sub-email-modelos').classList.remove('active');
+      document.getElementById('sub-email-itens').classList.remove('active');
+
+      if (tipo === 'automatico') {
+        document.getElementById('sub-email-automatico').classList.add('active');
+      } else if (tipo === 'manual') {
+        document.getElementById('sub-email-manual').classList.add('active');
+      } else if (tipo === 'modelos') {
+        document.getElementById('sub-email-modelos').classList.add('active');
+      } else {
+        document.getElementById('emails-main-menu').classList.add('active');
+      }
+    }
+
+    function voltarMenuEmails() {
+      abrirSubEmail('menu');
+    }
+
+    function renderizarMenuEmailsModelos() {
+      const container = document.getElementById('emailsCategoryList');
       container.innerHTML = '';
-      banco.categorias.forEach(cat => {
-        cat.itens.forEach(item => {
-          const div = document.createElement('div');
-          div.className = 'carousel-item';
-          div.innerHTML = `
-            <div>
-              <h3>${item.titulo}</h3>
-              <p>${item.mensagem}</p>
-            </div>
-            <button class="btn btn-secondary" onclick="usarEmail(\`${item.assunto || ''}\`, \`${item.mensagem}\`)">Usar no Envio</button>
-          `;
-          container.appendChild(div);
-        });
+
+      dadosEmails.categorias.forEach((cat, index) => {
+        const emoji = emojisCategorias[index % emojisCategorias.length];
+        const btn = document.createElement('button');
+        btn.className = 'menu-btn';
+        btn.innerHTML = `<span><span class="emoji">${emoji}</span> ${cat.nome}</span><span>➔</span>`;
+        btn.onclick = () => abrirCategoriaEmail(cat);
+        container.appendChild(btn);
+      });
+    }
+
+    function abrirCategoriaEmail(cat) {
+      document.getElementById('sub-email-modelos').classList.remove('active');
+      document.getElementById('sub-email-itens').classList.add('active');
+      document.getElementById('emailsSubTitle').innerText = cat.nome;
+
+      const itemContainer = document.getElementById('emailsItemList');
+      itemContainer.innerHTML = '';
+
+      cat.itens.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'item-card';
+        div.innerHTML = `
+          <h3>${item.titulo}</h3>
+          <p>${item.mensagem}</p>
+          <button class="btn btn-secondary" onclick="usarEmail(\`${item.assunto || ''}\`, \`${item.mensagem}\`)">Usar no E-mail Manual</button>
+        `;
+        itemContainer.appendChild(div);
       });
     }
 
@@ -391,15 +555,17 @@
     }
 
     function usarEmail(assunto, mensagem) {
-      const idAlvo = document.getElementById('idAlvo').value || '[ID_ALVO]';
-      const meuId = document.getElementById('meuId').value || '[MEU_ID]';
+      const idAlvo = document.getElementById('idAlvoManual').value || '[ID_ALVO]';
+      const meuId = document.getElementById('meuIdManual').value || '[MEU_ID]';
       
       const msgFormatada = mensagem.replace(/{ID_ALVO}/g, idAlvo).replace(/{MEU_ID}/g, meuId);
       const assuntoFormatado = assunto.replace(/{ID_ALVO}/g, idAlvo).replace(/{MEU_ID}/g, meuId);
 
       document.getElementById('assuntoManual').value = assuntoFormatado;
       document.getElementById('mensagemManual').value = msgFormatada;
-      trocarAba('envio', document.querySelectorAll('.nav-item')[3]);
+
+      // Vai direto para a subtela de envio manual
+      abrirSubEmail('manual');
     }
 
     function trocarAba(abaId, elementoBtn) {
@@ -419,7 +585,6 @@
       reader.readAsDataURL(event.target.files[0]);
     }
 
-    // ANÁLISE REAL COM A API VISION DA OPENAI
     async function analisarComOpenAI() {
       const input = document.getElementById('mediaInput');
       const statusArea = document.getElementById('statusArea');
@@ -458,13 +623,11 @@
                 content: [
                   {
                     type: "text",
-                    text: "Analise este print/imagem com foco em violações de diretrizes de redes sociais (como menor de idade sem supervisão, conteúdo inapropriado, spam ou violações graves). Responda de forma direta no seguinte formato:\nSTATUS: [VERMELHO ou VERDE]\nMOTIVO: [Explicação curta e direta do que foi encontrado]"
+                    text: "Analise este print/imagem com foco em violações de diretrizes de redes sociais. Responda no formato:\nSTATUS: [VERMELHO ou VERDE]\nMOTIVO: [Explicação curta]"
                   },
                   {
                     type: "image_url",
-                    image_url: {
-                      url: base64Image
-                    }
+                    image_url: { url: base64Image }
                   }
                 ]
               }
@@ -474,13 +637,9 @@
         });
 
         const data = await response.json();
-        
-        if (data.error) {
-          throw new Error(data.error.message);
-        }
+        if (data.error) throw new Error(data.error.message);
 
         const respostaIA = data.choices[0].message.content;
-
         if (respostaIA.includes("VERMELHO")) {
           statusArea.className = 'status-badge status-red';
           statusArea.innerText = '🔴 Status Vermelho: Violação Detectada';
@@ -488,27 +647,11 @@
           statusArea.className = 'status-badge status-green';
           statusArea.innerText = '🟢 Status Verde: Conta / Conteúdo Regular';
         }
-
         detail.innerText = respostaIA;
-
       } catch (error) {
         statusArea.className = 'status-badge status-red';
         statusArea.innerText = '⚠️ Erro na Análise';
-        detail.innerText = 'Erro ao conectar com a API da OpenAI: ' + error.message;
-      }
-    }
-
-    function mudarModo(modo) {
-      if (modo === 'manual') {
-        document.getElementById('modoManual').classList.remove('hidden');
-        document.getElementById('modoAuto').classList.add('hidden');
-        document.getElementById('btnManual').classList.add('active');
-        document.getElementById('btnAuto').classList.remove('active');
-      } else {
-        document.getElementById('modoManual').classList.add('hidden');
-        document.getElementById('modoAuto').classList.remove('hidden');
-        document.getElementById('btnManual').classList.remove('active');
-        document.getElementById('btnAuto').classList.add('active');
+        detail.innerText = 'Erro ao conectar com a API: ' + error.message;
       }
     }
 
@@ -517,19 +660,8 @@
       document.getElementById('senhaCounter').innerText = `Senhas de App detectadas: ${senhas.length}`;
     }
 
-    function enviarManual() {
-      alert('Comando de envio manual acionado!');
-    }
-
-    function iniciarAutomacao() {
-      const idAlvo = document.getElementById('idAlvo').value;
-      const meuId = document.getElementById('meuId').value;
-      if (!idAlvo || !meuId) {
-        alert('Por favor, preencha o ID da pessoa denunciada e o seu ID!');
-        return;
-      }
-      alert('Iniciando disparos automáticos!');
-    }
+    function enviarManual() { alert('Comando de envio manual acionado!'); }
+    function iniciarAutomacao() { alert('Iniciando disparos automáticos!'); }
 
     window.onload = carregarDados;
   </script>
