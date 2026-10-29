@@ -22,15 +22,16 @@
       background-color: var(--bg-dark); 
       color: var(--text-main); 
       padding: 15px; 
-      padding-bottom: 90px; 
+      padding-bottom: 40px; 
     }
 
-    header { text-align: center; margin-bottom: 20px; }
+    header { text-align: center; margin-bottom: 25px; }
     header h1 { font-size: 1.5rem; color: #fff; text-shadow: 0 0 10px rgba(255,0,85,0.4); }
     header p { color: var(--text-muted); font-size: 0.85rem; }
 
-    .tab-content, .sub-view { display: none; }
-    .tab-content.active, .sub-view.active { display: block; }
+    /* Controle de Telas e Subtelas */
+    .screen { display: none; }
+    .screen.active { display: block; }
 
     .card {
       background: var(--bg-card);
@@ -43,7 +44,7 @@
 
     .card h2 {
       font-size: 1.1rem;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
       color: var(--accent-neon);
       display: flex;
       align-items: center;
@@ -62,7 +63,7 @@
       background: linear-gradient(135deg, #181c24, #12151c);
       border: 1px solid var(--border-color);
       border-radius: 10px;
-      padding: 14px 16px;
+      padding: 16px;
       color: var(--text-main);
       font-size: 0.95rem;
       font-weight: 600;
@@ -86,10 +87,10 @@
     }
 
     .menu-btn .emoji {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
 
-    /* Botão de Voltar para Subtelas */
+    /* Botão de Voltar */
     .btn-voltar {
       background: transparent;
       border: 1px solid var(--text-muted);
@@ -108,7 +109,7 @@
       color: var(--text-main);
     }
 
-    /* Listagem de itens dinâmicos nas subtelas */
+    /* Listagem de itens dinâmicos */
     .item-card {
       background: rgba(0, 0, 0, 0.25);
       border: 1px solid var(--border-color);
@@ -189,7 +190,6 @@
     .status-red { background: rgba(255, 0, 85, 0.15); color: #ff0055; border: 1px solid #ff0055; }
     .status-none { background: rgba(255,255,255,0.05); color: var(--text-muted); }
 
-    /* Preview da imagem carregada */
     .preview-container {
       margin-top: 10px;
       text-align: center;
@@ -200,40 +200,6 @@
       border-radius: 8px;
       border: 1px solid var(--border-color);
       display: none;
-    }
-
-    /* Barra Inferior com Ícones */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #12151c;
-      border-top: 1px solid var(--border-color);
-      display: flex;
-      justify-content: space-around;
-      padding: 10px 0;
-      z-index: 1000;
-    }
-    .nav-item {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 0.70rem;
-      cursor: pointer;
-      gap: 4px;
-      flex: 1;
-    }
-    .nav-item svg {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
-    }
-    .nav-item.active {
-      color: var(--accent-neon);
     }
 
     .hidden { display: none; }
@@ -247,22 +213,47 @@
     <p>Gerenciador de Automação & Análise OpenAI Vision</p>
   </header>
 
-  <!-- ABA 1: TICKETS (LISTA DE CATEGORIAS EM BOTÕES VERTICAIS) -->
-  <div id="tab-tickets" class="tab-content active">
+  <!-- ================= TELA PRINCIPAL (MENU DE BOTÕES VERTICAIS) ================= -->
+  <div id="screen-main" class="screen active">
     <div class="card">
-      <h2>🎫 Textos para Tickets (Kwai)</h2>
-      
-      <!-- MENU PRINCIPAL DE TICKETS -->
-      <div id="tickets-main-menu" class="sub-view active">
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Selecione uma categoria de ticket abaixo:</p>
-        <div class="menu-list" id="ticketsCategoryList">
-          <!-- Gerado dinâmico pelo JSON -->
-        </div>
+      <h2>📌 Menu Principal</h2>
+      <div class="menu-list">
+        <button class="menu-btn" onclick="mudarTela('screen-tickets')">
+          <span><span class="emoji">🎫</span> Textos para Tickets (Kwai)</span>
+          <span>➔</span>
+        </button>
+        <button class="menu-btn" onclick="mudarTela('screen-email-auto')">
+          <span><span class="emoji">⚡</span> E-mail Automático (Disparos em Massa)</span>
+          <span>➔</span>
+        </button>
+        <button class="menu-btn" onclick="mudarTela('screen-email-manual')">
+          <span><span class="emoji">✍️</span> E-mail Manual (Individual)</span>
+          <span>➔</span>
+        </button>
+        <button class="menu-btn" onclick="mudarTela('screen-email-modelos')">
+          <span><span class="emoji">📂</span> Modelos de E-mail por Categoria</span>
+          <span>➔</span>
+        </button>
+        <button class="menu-btn" onclick="mudarTela('screen-analise')">
+          <span><span class="emoji">🔍</span> Análise Inteligente (OpenAI Vision)</span>
+          <span>➔</span>
+        </button>
       </div>
+    </div>
+  </div>
 
-      <!-- SUBTELA DA CATEGORIA DE TICKET -->
-      <div id="tickets-sub-view" class="sub-view">
-        <button class="btn-voltar" onclick="voltarMenuTickets()">⬅ Voltar para Categorias</button>
+  <!-- ================= TELA 1: TICKETS ================= -->
+  <div id="screen-tickets" class="screen">
+    <div class="card">
+      <button class="btn-voltar" onclick="mudarTela('screen-main')">⬅ Voltar ao Menu</button>
+      <h2>🎫 Categorias de Tickets</h2>
+      
+      <!-- Lista de categorias de tickets -->
+      <div id="ticketsCategoryList" class="menu-list"></div>
+
+      <!-- Subtela de itens do ticket -->
+      <div id="tickets-items-view" class="hidden" style="margin-top: 15px;">
+        <button class="btn-voltar" onclick="voltarCategoriasTickets()">⬅ Voltar às Categorias</button>
         <h3 id="ticketsSubTitle" style="color: var(--accent-neon); margin-bottom: 12px; font-size: 1rem;"></h3>
         
         <div class="form-group" style="margin-bottom: 15px;">
@@ -270,117 +261,94 @@
           <input type="text" id="idAlvoTicket" placeholder="Ex: 987654321">
         </div>
         
-        <div id="ticketsItemList">
-          <!-- Itens da categoria selecionada -->
-        </div>
+        <div id="ticketsItemList"></div>
       </div>
-
     </div>
   </div>
 
-  <!-- ABA 2: E-MAILS (LISTA DE OPÇÕES EM BOTÕES VERTICAIS) -->
-  <div id="tab-emails" class="tab-content">
+  <!-- ================= TELA 2: E-MAIL AUTOMÁTICO ================= -->
+  <div id="screen-email-auto" class="screen">
     <div class="card">
-      <h2>✉️ Central de E-mail & Envios</h2>
+      <button class="btn-voltar" onclick="mudarTela('screen-main')">⬅ Voltar ao Menu</button>
+      <h2>⚡ Configurar E-mail Automático</h2>
       
-      <!-- MENU PRINCIPAL DE E-MAILS -->
-      <div id="emails-main-menu" class="sub-view active">
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Escolha o modo de envio desejado:</p>
-        <div class="menu-list">
-          <button class="menu-btn" onclick="abrirSubEmail('automatico')">
-            <span><span class="emoji">⚡</span> E-mail Automático (Disparos em Massa)</span>
-            <span>➔</span>
-          </button>
-          <button class="menu-btn" onclick="abrirSubEmail('manual')">
-            <span><span class="emoji">✍️</span> E-mail Manual (Individual)</span>
-            <span>➔</span>
-          </button>
-          <button class="menu-btn" onclick="abrirSubEmail('modelos')">
-            <span><span class="emoji">📂</span> Modelos de Texto por Categoria</span>
-            <span>➔</span>
-          </button>
-        </div>
+      <div class="form-group">
+        <label>ID da Pessoa Denunciada (Alvo):</label>
+        <input type="text" id="idAlvoAuto" placeholder="Ex: 987654321">
       </div>
-
-      <!-- SUBTELA: E-MAIL AUTOMÁTICO -->
-      <div id="sub-email-automatico" class="sub-view">
-        <button class="btn-voltar" onclick="voltarMenuEmails()">⬅ Voltar ao Menu</button>
-        <h3 style="color: var(--accent-neon); margin-bottom: 12px; font-size: 1rem;">⚡ Configurar E-mail Automático</h3>
-        
-        <div class="form-group">
-          <label>ID da Pessoa Denunciada (Alvo):</label>
-          <input type="text" id="idAlvoAuto" placeholder="Ex: 987654321">
-        </div>
-        <div class="form-group">
-          <label>Seu ID Kwai (Denunciante):</label>
-          <input type="text" id="meuIdAuto" placeholder="Ex: 15000987654">
-        </div>
-        <div class="form-group">
-          <label>Lista de E-mails Destino (um por linha):</label>
-          <textarea id="listaEmails" placeholder="suporte1@kwai.com&#10;suporte2@kwai.com"></textarea>
-        </div>
-        <div class="form-group">
-          <label>Senhas de App carregadas (uma por linha):</label>
-          <textarea id="senhasApp" oninput="atualizarContadorSenhas()" placeholder="senha_app_1&#10;senha_app_2"></textarea>
-          <div class="counter" id="senhaCounter">Senhas de App detectadas: 0</div>
-        </div>
-        <div class="form-group">
-          <label>Quantidade de disparos:</label>
-          <input type="number" id="qtdEnviol" value="10">
-        </div>
-        <button class="btn" onclick="iniciarAutomacao()">Iniciar Automação</button>
+      <div class="form-group">
+        <label>Seu ID Kwai (Denunciante):</label>
+        <input type="text" id="meuIdAuto" placeholder="Ex: 15000987654">
       </div>
-
-      <!-- SUBTELA: E-MAIL MANUAL -->
-      <div id="sub-email-manual" class="sub-view">
-        <button class="btn-voltar" onclick="voltarMenuEmails()">⬅ Voltar ao Menu</button>
-        <h3 style="color: var(--accent-neon); margin-bottom: 12px; font-size: 1rem;">✍️ Configurar E-mail Manual</h3>
-        
-        <div class="form-group">
-          <label>ID da Pessoa Denunciada (Alvo):</label>
-          <input type="text" id="idAlvoManual" placeholder="Ex: 987654321">
-        </div>
-        <div class="form-group">
-          <label>Seu ID Kwai (Denunciante):</label>
-          <input type="text" id="meuIdManual" placeholder="Ex: 15000987654">
-        </div>
-        <div class="form-group">
-          <label>Para (E-mail destino):</label>
-          <input type="email" id="paraManual" placeholder="suporte@kwai.com">
-        </div>
-        <div class="form-group">
-          <label>Assunto:</label>
-          <input type="text" id="assuntoManual" placeholder="Assunto da mensagem">
-        </div>
-        <div class="form-group">
-          <label>Mensagem:</label>
-          <textarea id="mensagemManual" placeholder="Texto preenchido..."></textarea>
-        </div>
-        <button class="btn" onclick="enviarManual()">Enviar E-mail</button>
+      <div class="form-group">
+        <label>Lista de E-mails Destino (um por linha):</label>
+        <textarea id="listaEmails" placeholder="suporte1@kwai.com&#10;suporte2@kwai.com"></textarea>
       </div>
-
-      <!-- SUBTELA: MODELOS DE TEXTO DE E-MAIL POR CATEGORIA -->
-      <div id="sub-email-modelos" class="sub-view">
-        <button class="btn-voltar" onclick="abrirSubEmail('menu')">⬅ Voltar ao Menu</button>
-        <h3 style="color: var(--accent-neon); margin-bottom: 12px; font-size: 1rem;">📂 Escolha a Categoria de E-mail</h3>
-        <div class="menu-list" id="emailsCategoryList">
-          <!-- Gerado dinâmico -->
-        </div>
+      <div class="form-group">
+        <label>Senhas de App carregadas (uma por linha):</label>
+        <textarea id="senhasApp" oninput="atualizarContadorSenhas()" placeholder="senha_app_1&#10;senha_app_2"></textarea>
+        <div class="counter" id="senhaCounter">Senhas de App detectadas: 0</div>
       </div>
+      <div class="form-group">
+        <label>Quantidade de disparos:</label>
+        <input type="number" id="qtdEnviol" value="10">
+      </div>
+      <button class="btn" onclick="iniciarAutomacao()">Iniciar Automação</button>
+    </div>
+  </div>
 
-      <!-- SUBTELA DE ITENS DA CATEGORIA DE E-MAIL -->
-      <div id="sub-email-itens" class="sub-view">
-        <button class="btn-voltar" onclick="abrirSubEmail('modelos')">⬅ Voltar às Categorias</button>
+  <!-- ================= TELA 3: E-MAIL MANUAL ================= -->
+  <div id="screen-email-manual" class="screen">
+    <div class="card">
+      <button class="btn-voltar" onclick="mudarTela('screen-main')">⬅ Voltar ao Menu</button>
+      <h2>✍️ Configurar E-mail Manual</h2>
+      
+      <div class="form-group">
+        <label>ID da Pessoa Denunciada (Alvo):</label>
+        <input type="text" id="idAlvoManual" placeholder="Ex: 987654321">
+      </div>
+      <div class="form-group">
+        <label>Seu ID Kwai (Denunciante):</label>
+        <input type="text" id="meuIdManual" placeholder="Ex: 15000987654">
+      </div>
+      <div class="form-group">
+        <label>Para (E-mail destino):</label>
+        <input type="email" id="paraManual" placeholder="suporte@kwai.com">
+      </div>
+      <div class="form-group">
+        <label>Assunto:</label>
+        <input type="text" id="assuntoManual" placeholder="Assunto da mensagem">
+      </div>
+      <div class="form-group">
+        <label>Mensagem:</label>
+        <textarea id="mensagemManual" placeholder="Texto preenchido..."></textarea>
+      </div>
+      <button class="btn" onclick="enviarManual()">Enviar E-mail</button>
+    </div>
+  </div>
+
+  <!-- ================= TELA 4: MODELOS DE E-MAIL ================= -->
+  <div id="screen-email-modelos" class="screen">
+    <div class="card">
+      <button class="btn-voltar" onclick="mudarTela('screen-main')">⬅ Voltar ao Menu</button>
+      <h2>📂 Categorias de Modelos de E-mail</h2>
+      
+      <!-- Lista de categorias de e-mail -->
+      <div id="emailsCategoryList" class="menu-list"></div>
+
+      <!-- Subtela de itens do e-mail -->
+      <div id="emails-items-view" class="hidden" style="margin-top: 15px;">
+        <button class="btn-voltar" onclick="voltarCategoriasEmails()">⬅ Voltar às Categorias</button>
         <h3 id="emailsSubTitle" style="color: var(--accent-neon); margin-bottom: 12px; font-size: 1rem;"></h3>
         <div id="emailsItemList"></div>
       </div>
-
     </div>
   </div>
 
-  <!-- ABA 3: ANÁLISE DE PERFIL -->
-  <div id="tab-analise" class="tab-content">
+  <!-- ================= TELA 5: ANÁLISE DE PERFIL ================= -->
+  <div id="screen-analise" class="screen">
     <div class="card">
+      <button class="btn-voltar" onclick="mudarTela('screen-main')">⬅ Voltar ao Menu</button>
       <h2>🔍 Análise Inteligente (OpenAI Vision)</h2>
       
       <div class="form-group">
@@ -404,26 +372,9 @@
     </div>
   </div>
 
-  <!-- BARRA DE NAVEGAÇÃO INFERIOR -->
-  <nav class="bottom-nav">
-    <button class="nav-item active" onclick="trocarAba('tickets', this)">
-      <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
-      Tickets
-    </button>
-    <button class="nav-item" onclick="trocarAba('emails', this)">
-      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      E-mails
-    </button>
-    <button class="nav-item" onclick="trocarAba('analise', this)">
-      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-      Análise
-    </button>
-  </nav>
-
   <script>
     let dadosTickets = { categorias: [] };
     let dadosEmails = { categorias: [] };
-
     const emojisCategorias = ["🛡️", "⚠️", "🚨", "📌", "⚙️", "🔥", "⚡", "📋"];
 
     async function carregarDados() {
@@ -440,7 +391,14 @@
       }
     }
 
-    // --- MENU E SUBTELAS DE TICKETS ---
+    // Alternar Telas Principais
+    function mudarTela(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(screenId).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    // --- RENDERIZAÇÃO DE TICKETS ---
     function renderizarMenuTickets() {
       const container = document.getElementById('ticketsCategoryList');
       container.innerHTML = '';
@@ -456,8 +414,8 @@
     }
 
     function abrirCategoriaTicket(cat) {
-      document.getElementById('tickets-main-menu').classList.remove('active');
-      document.getElementById('tickets-sub-view').classList.add('active');
+      document.getElementById('ticketsCategoryList').classList.add('hidden');
+      document.getElementById('tickets-items-view').classList.remove('hidden');
       document.getElementById('ticketsSubTitle').innerText = cat.nome;
 
       const itemContainer = document.getElementById('ticketsItemList');
@@ -475,34 +433,12 @@
       });
     }
 
-    function voltarMenuTickets() {
-      document.getElementById('tickets-sub-view').classList.remove('active');
-      document.getElementById('tickets-main-menu').classList.add('active');
+    function voltarCategoriasTickets() {
+      document.getElementById('tickets-items-view').classList.add('hidden');
+      document.getElementById('ticketsCategoryList').classList.remove('hidden');
     }
 
-    // --- MENU E SUBTELAS DE E-MAILS ---
-    function abrirSubEmail(tipo) {
-      document.getElementById('emails-main-menu').classList.remove('active');
-      document.getElementById('sub-email-automatico').classList.remove('active');
-      document.getElementById('sub-email-manual').classList.remove('active');
-      document.getElementById('sub-email-modelos').classList.remove('active');
-      document.getElementById('sub-email-itens').classList.remove('active');
-
-      if (tipo === 'automatico') {
-        document.getElementById('sub-email-automatico').classList.add('active');
-      } else if (tipo === 'manual') {
-        document.getElementById('sub-email-manual').classList.add('active');
-      } else if (tipo === 'modelos') {
-        document.getElementById('sub-email-modelos').classList.add('active');
-      } else {
-        document.getElementById('emails-main-menu').classList.add('active');
-      }
-    }
-
-    function voltarMenuEmails() {
-      abrirSubEmail('menu');
-    }
-
+    // --- RENDERIZAÇÃO DE MODELOS DE E-MAIL ---
     function renderizarMenuEmailsModelos() {
       const container = document.getElementById('emailsCategoryList');
       container.innerHTML = '';
@@ -518,8 +454,8 @@
     }
 
     function abrirCategoriaEmail(cat) {
-      document.getElementById('sub-email-modelos').classList.remove('active');
-      document.getElementById('sub-email-itens').classList.add('active');
+      document.getElementById('emailsCategoryList').classList.add('hidden');
+      document.getElementById('emails-items-view').classList.remove('hidden');
       document.getElementById('emailsSubTitle').innerText = cat.nome;
 
       const itemContainer = document.getElementById('emailsItemList');
@@ -535,6 +471,11 @@
         `;
         itemContainer.appendChild(div);
       });
+    }
+
+    function voltarCategoriasEmails() {
+      document.getElementById('emails-items-view').classList.add('hidden');
+      document.getElementById('emailsCategoryList').classList.remove('hidden');
     }
 
     function copiarTicket(mensagemBase, botao) {
@@ -564,15 +505,7 @@
       document.getElementById('assuntoManual').value = assuntoFormatado;
       document.getElementById('mensagemManual').value = msgFormatada;
 
-      // Vai direto para a subtela de envio manual
-      abrirSubEmail('manual');
-    }
-
-    function trocarAba(abaId, elementoBtn) {
-      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
-      document.getElementById('tab-' + abaId).classList.add('active');
-      elementoBtn.classList.add('active');
+      mudarTela('screen-email-manual');
     }
 
     function mostrarPreview(event) {
