@@ -208,7 +208,6 @@
   <div id="screen-main" class="screen active">
     <div class="card">
       <h2>
-        <!-- Três barrinhas no título -->
         <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
         Menu Principal
       </h2>
@@ -253,11 +252,8 @@
         <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
         Categorias de Tickets
       </h2>
-      
-      <!-- Lista de categorias de tickets -->
       <div id="ticketsCategoryList" class="menu-list"></div>
 
-      <!-- Subtela de itens do ticket -->
       <div id="tickets-items-view" class="hidden" style="margin-top: 15px;">
         <button class="btn-voltar" onclick="voltarCategoriasTickets()">⬅ Voltar às Categorias</button>
         <h3 id="ticketsSubTitle" style="color: var(--silver-light); margin-bottom: 12px; font-size: 1rem;"></h3>
@@ -313,11 +309,8 @@
         <svg viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
         Categorias de Modelos de E-mail
       </h2>
-      
-      <!-- Lista de categorias de e-mail -->
       <div id="emailsCategoryList" class="menu-list"></div>
 
-      <!-- Subtela de itens do e-mail -->
       <div id="emails-items-view" class="hidden" style="margin-top: 15px;">
         <button class="btn-voltar" onclick="voltarCategoriasEmails()">⬅ Voltar às Categorias</button>
         <h3 id="emailsSubTitle" style="color: var(--silver-light); margin-bottom: 12px; font-size: 1rem;"></h3>
@@ -337,7 +330,7 @@
       
       <div class="form-group">
         <label>Chave da API OpenAI:</label>
-        <input type="password" id="apiKeyInput" value="Sk-proj-0zQQBiCh3QYDZBivHL_RMKg00ON94nWQV99_N250lXKzBp2QKR6tSYrXYEHO9_IEOBhU0andsZT3BlbkFJvOpatBKanSStGNvtrBNfjASOs_Xg1Ray1SWyESHV4oPRh2TZUj8hRljzs4FerDZsN3k358L3oA">
+        <input type="password" id="apiKeyInput" value="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">
       </div>
 
       <div class="form-group">
@@ -360,7 +353,6 @@
     let dadosTickets = { categorias: [] };
     let dadosEmails = { categorias: [] };
 
-    // SVGs desenhados para substituir emojis nas categorias
     const svgIconeCategoria = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:var(--silver);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>';
 
     async function carregarDados() {
@@ -377,14 +369,12 @@
       }
     }
 
-    // Alternar Telas Principais
     function mudarTela(screenId) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById(screenId).classList.add('active');
       window.scrollTo(0, 0);
     }
 
-    // --- RENDERIZAÇÃO DE TICKETS (Apenas dados de tickets.json) ---
     function renderizarMenuTickets() {
       const container = document.getElementById('ticketsCategoryList');
       container.innerHTML = '';
@@ -423,7 +413,6 @@
       document.getElementById('ticketsCategoryList').classList.remove('hidden');
     }
 
-    // --- RENDERIZAÇÃO DE MODELOS DE E-MAIL (Apenas dados de emails.json) ---
     function renderizarMenuEmailsModelos() {
       const container = document.getElementById('emailsCategoryList');
       container.innerHTML = '';
@@ -499,7 +488,9 @@
         output.src = reader.result;
         output.style.display = 'block';
       };
-      reader.readAsDataURL(event.target.files[0]);
+      if (event.target.files && event.target.files[0]) {
+        reader.readAsDataURL(event.target.files[0]);
+      }
     }
 
     async function analisarComOpenAI() {
@@ -554,7 +545,10 @@
         });
 
         const data = await response.json();
-        if (data.error) throw new Error(data.error.message);
+        
+        if (data.error) {
+          throw new Error(data.error.message || "Erro desconhecido da API");
+        }
 
         const respostaIA = data.choices[0].message.content;
         if (respostaIA.includes("VERMELHO")) {
