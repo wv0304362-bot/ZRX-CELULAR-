@@ -479,7 +479,6 @@
       mudarTela('screen-email-manual');
     }
 
-    /* Redimensiona a imagem para otimizar o envio */
     function mostrarPreview(event) {
       const file = event.target.files[0];
       if (!file) return;
@@ -521,7 +520,7 @@
       reader.readAsDataURL(file);
     }
 
-    /* Chamada utilizando o Puter.js */
+    /* Chamada corrigida e segura com Puter.js */
     async function analisarComPuter() {
       const statusArea = document.getElementById('statusArea');
       const detail = document.getElementById('analysisDetail');
@@ -538,12 +537,20 @@
       try {
         const promptTexto = "Analisa esta imagem/print com foco em violações de diretrizes de redes sociais (Kwai, TikTok, etc). Responde estritamente no formato:\nSTATUS: [VERMELHO ou VERDE]\nMOTIVO: [Explicação curta e direta]";
 
-        // Chamada à API multimodal do Puter.js
-        const resposta = await puter.ai.chat(promptTexto, imagemOtimizadaBase64);
+        // Estrutura segura compatível com a API de chat multimodal do Puter.js
+        const resposta = await puter.ai.chat([
+          {
+            role: 'user',
+            content: [
+              { type: 'text', text: promptTexto },
+              { type: 'image_url', image_url: { url: imagemOtimizadaBase64 } }
+            ]
+          }
+        ]);
         
-        const conteudo = typeof resposta === 'string' ? resposta : (resposta.message ? resposta.message.content : JSON.stringify(resposta));
+        const conteudo = typeof resposta === 'string' ? resposta : (resposta.message ? resposta.message.content : (resposta.text || JSON.stringify(resposta)));
 
-        if (conteudo.includes("VERMELHO")) {
+        if (conteudo.toUpperCase().includes("VERMELHO")) {
           statusArea.className = 'status-badge status-red';
           statusArea.innerText = 'Status Vermelho: Violação Detectada';
         } else {
@@ -555,7 +562,7 @@
       } catch (error) {
         statusArea.className = 'status-badge status-red';
         statusArea.innerText = 'Erro na Análise';
-        detail.innerText = 'Erro ao conectar ao Puter.js: ' + error.message;
+        detail.innerText = 'Erro ao conectar ao Puter.js: ' + (error.message || error);
       }
     }
 
