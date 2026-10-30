@@ -7,12 +7,12 @@
   <style>
     :root {
       --bg-dark: #0a0c10;          /* Preto absoluto refinado */
-      --bg-card: #14171f;          /* Cinza chumbo escuro para blocos */
-      --bg-input: #0d0f14;         /* Preto fosco para inputs */
+      --bg-card: rgba(20, 23, 31, 0.45); /* Transparência para ver a imagem de fundo */
+      --bg-input: rgba(13, 15, 20, 0.7);  /* Inputs levemente transparentes */
       --silver: #c0c5ce;           /* Prateado principal */
       --silver-light: #e6ebf5;     /* Prateado claro para destaques */
       --silver-dark: #7a8291;      /* Cinza prateado secundário */
-      --border-color: #222732;     /* Borda sutil chumbo/prateada */
+      --border-color: rgba(255, 255, 255, 0.1); /* Borda sutil e translúcida */
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -30,8 +30,8 @@
     }
 
     header { text-align: center; margin-bottom: 25px; }
-    header h1 { font-size: 1.5rem; color: #fff; letter-spacing: 1px; text-shadow: 0 0 10px rgba(192, 197, 206, 0.2); }
-    header p { color: var(--silver-dark); font-size: 0.85rem; }
+    header h1 { font-size: 1.5rem; color: #fff; letter-spacing: 1px; text-shadow: 0 0 10px rgba(0, 0, 0, 0.8); }
+    header p { color: var(--silver-light); font-size: 0.85rem; text-shadow: 0 0 5px rgba(0, 0, 0, 0.8); }
 
     /* Controle de Telas e Subtelas */
     .screen { display: none; }
@@ -43,7 +43,9 @@
       border-radius: 12px;
       padding: 18px;
       margin-bottom: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
     .card h2 {
@@ -64,7 +66,7 @@
 
     .menu-btn {
       width: 100%;
-      background: linear-gradient(135deg, #161a23, #0f1117);
+      background: rgba(22, 26, 35, 0.65);
       border: 1px solid var(--border-color);
       border-radius: 10px;
       padding: 16px;
@@ -77,11 +79,12 @@
       cursor: pointer;
       transition: all 0.2s ease;
       box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      backdrop-filter: blur(4px);
     }
 
     .menu-btn:hover {
       border-color: var(--silver);
-      background: linear-gradient(135deg, #1c212c, #131720);
+      background: rgba(28, 33, 44, 0.8);
     }
 
     .menu-btn span {
@@ -98,9 +101,9 @@
 
     /* Botão de Voltar */
     .btn-voltar {
-      background: transparent;
+      background: rgba(0, 0, 0, 0.4);
       border: 1px solid var(--silver-dark);
-      color: var(--silver-dark);
+      color: var(--silver-light);
       padding: 8px 14px;
       border-radius: 8px;
       font-size: 0.85rem;
@@ -112,23 +115,23 @@
     }
     .btn-voltar:hover {
       border-color: var(--silver-light);
-      color: var(--silver-light);
+      color: #fff;
     }
 
     /* Listagem de itens dinâmicos */
     .item-card {
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.5);
       border: 1px solid var(--border-color);
       border-radius: 10px;
       padding: 14px;
       margin-bottom: 12px;
     }
     .item-card h3 { font-size: 0.95rem; color: #fff; margin-bottom: 6px; }
-    .item-card p { font-size: 0.82rem; color: var(--silver-dark); margin-bottom: 10px; }
+    .item-card p { font-size: 0.82rem; color: var(--silver); margin-bottom: 10px; }
 
     /* Formulários */
     .form-group { margin-bottom: 12px; }
-    .form-group label { display: block; font-size: 0.8rem; color: var(--silver-dark); margin-bottom: 4px; }
+    .form-group label { display: block; font-size: 0.8rem; color: var(--silver-light); margin-bottom: 4px; }
     input, textarea, select {
       width: 100%;
       background: var(--bg-input);
@@ -142,34 +145,12 @@
     input:focus, textarea:focus { border-color: var(--silver); }
     textarea { resize: vertical; min-height: 70px; }
 
-    .mode-switch {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 15px;
-      background: var(--bg-input);
-      padding: 4px;
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
-    }
-    .mode-btn {
-      flex: 1;
-      padding: 8px;
-      border: none;
-      background: transparent;
-      color: var(--silver-dark);
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 0.85rem;
-    }
-    .mode-btn.active { background: #2b313b; color: #fff; }
-
     .btn {
       width: 100%;
       padding: 10px;
       border: none;
       border-radius: 8px;
-      background: linear-gradient(135deg, #2b313b, #181c24);
+      background: rgba(43, 49, 59, 0.8);
       border: 1px solid var(--silver-dark);
       color: #fff;
       font-weight: bold;
@@ -177,7 +158,7 @@
       font-size: 0.9rem;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
     }
-    .btn:hover { border-color: var(--silver-light); }
+    .btn:hover { border-color: var(--silver-light); background: rgba(55, 62, 75, 0.9); }
 
     .btn-secondary {
       background: transparent;
@@ -227,7 +208,8 @@
   <div id="screen-main" class="screen active">
     <div class="card">
       <h2>
-        <svg viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+        <!-- Três barrinhas no título -->
+        <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
         Menu Principal
       </h2>
       <div class="menu-list">
@@ -235,13 +217,6 @@
           <span>
             <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
             Textos para Tickets (Kwai)
-          </span>
-          <span>➔</span>
-        </button>
-        <button class="menu-btn" onclick="mudarTela('screen-email-auto')">
-          <span>
-            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-            E-mail Automático (Disparos em Massa)
           </span>
           <span>➔</span>
         </button>
@@ -297,41 +272,7 @@
     </div>
   </div>
 
-  <!-- ================= TELA 2: E-MAIL AUTOMÁTICO ================= -->
-  <div id="screen-email-auto" class="screen">
-    <div class="card">
-      <button class="btn-voltar" onclick="mudarTela('screen-main')">⬅ Voltar ao Menu</button>
-      <h2>
-        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        Configurar E-mail Automático
-      </h2>
-      
-      <div class="form-group">
-        <label>ID da Pessoa Denunciada (Alvo):</label>
-        <input type="text" id="idAlvoAuto" placeholder="Ex: 987654321">
-      </div>
-      <div class="form-group">
-        <label>Seu ID Kwai (Denunciante):</label>
-        <input type="text" id="meuIdAuto" placeholder="Ex: 15000987654">
-      </div>
-      <div class="form-group">
-        <label>Lista de E-mails Destino (um por linha):</label>
-        <textarea id="listaEmails" placeholder="suporte1@kwai.com&#10;suporte2@kwai.com"></textarea>
-      </div>
-      <div class="form-group">
-        <label>Senhas de App carregadas (uma por linha):</label>
-        <textarea id="senhasApp" oninput="atualizarContadorSenhas()" placeholder="senha_app_1&#10;senha_app_2"></textarea>
-        <div class="counter" id="senhaCounter">Senhas de App detectadas: 0</div>
-      </div>
-      <div class="form-group">
-        <label>Quantidade de disparos:</label>
-        <input type="number" id="qtdEnviol" value="10">
-      </div>
-      <button class="btn" onclick="iniciarAutomacao()">Iniciar Automação</button>
-    </div>
-  </div>
-
-  <!-- ================= TELA 3: E-MAIL MANUAL ================= -->
+  <!-- ================= TELA 2: E-MAIL MANUAL ================= -->
   <div id="screen-email-manual" class="screen">
     <div class="card">
       <button class="btn-voltar" onclick="mudarTela('screen-main')">⬅ Voltar ao Menu</button>
@@ -364,7 +305,7 @@
     </div>
   </div>
 
-  <!-- ================= TELA 4: MODELOS DE E-MAIL ================= -->
+  <!-- ================= TELA 3: MODELOS DE E-MAIL ================= -->
   <div id="screen-email-modelos" class="screen">
     <div class="card">
       <button class="btn-voltar" onclick="mudarTela('screen-main')">⬅ Voltar ao Menu</button>
@@ -385,7 +326,7 @@
     </div>
   </div>
 
-  <!-- ================= TELA 5: ANÁLISE DE PERFIL ================= -->
+  <!-- ================= TELA 4: ANÁLISE DE PERFIL ================= -->
   <div id="screen-analise" class="screen">
     <div class="card">
       <button class="btn-voltar" onclick="mudarTela('screen-main')">⬅ Voltar ao Menu</button>
@@ -631,13 +572,7 @@
       }
     }
 
-    function atualizarContadorSenhas() {
-      const senhas = document.getElementById('senhasApp').value.trim().split('\n').filter(s => s !== '');
-      document.getElementById('senhaCounter').innerText = `Senhas de App detectadas: ${senhas.length}`;
-    }
-
     function enviarManual() { alert('Comando de envio manual acionado!'); }
-    function iniciarAutomacao() { alert('Iniciando disparos automáticos!'); }
 
     window.onload = carregarDados;
   </script>
