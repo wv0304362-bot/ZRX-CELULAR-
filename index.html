@@ -4,8 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Painel Métodos Kwai</title>
-  <!-- Inclusão da biblioteca Puter.js -->
-  <script src="https://js.puter.com/v2/"></script>
   <style>
     :root {
       --bg-dark: #0a0c10;          /* Preto absoluto refinado */
@@ -203,7 +201,7 @@
 
   <header>
     <h1>PAINEL DE MÉTODOS KWAI</h1>
-    <p>Gerenciador de Automação & Análise IA Gratuita (Puter.js)</p>
+    <p>Gerenciador de Automação & Análise IA Groq</p>
   </header>
 
   <!-- ================= TELA PRINCIPAL ================= -->
@@ -238,7 +236,7 @@
         <button class="menu-btn" onclick="mudarTela('screen-analise')">
           <span>
             <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-            Análise Inteligente (Puter.js Grátis)
+            Análise Inteligente (Groq Vision)
           </span>
           <span>➔</span>
         </button>
@@ -327,8 +325,13 @@
       <button class="btn-voltar" onclick="mudarTela('screen-main')">⬅ Voltar ao Menu</button>
       <h2>
         <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-        Análise Inteligente (Puter.js)
+        Análise Inteligente (Groq Vision)
       </h2>
+
+      <div class="form-group">
+        <label>Chave da API Groq:</label>
+        <input type="password" id="apiKeyInput" value="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">
+      </div>
 
       <div class="form-group">
         <label>Selecionar Print (Perfil, Vídeo ou Mensagem):</label>
@@ -339,7 +342,7 @@
         <img id="imagePreview" alt="Preview da Mídia">
       </div>
 
-      <button class="btn" style="margin-top: 12px;" onclick="analisarComPuter()">Analisar com IA (Grátis)</button>
+      <button class="btn" style="margin-top: 12px;" onclick="analisarComGroq()">Analisar com IA (Groq)</button>
       
       <div id="statusArea" class="status-badge status-none">Aguardando envio de arquivo...</div>
       <p id="analysisDetail" style="font-size: 0.8rem; margin-top: 8px; color: var(--silver-dark);"></p>
@@ -520,37 +523,84 @@
       reader.readAsDataURL(file);
     }
 
-    /* Chamada corrigida e segura com Puter.js */
-    async function analisarComPuter() {
+    /* Chamada utilizando a API da Groq com suporte a Vision */
+    async function analisarComGroq() {
       const statusArea = document.getElementById('statusArea');
       const detail = document.getElementById('analysisDetail');
+      const apiKey = document.getElementById('apiKeyInput').value.trim();
 
       if (!imagemOtimizadaBase64) {
         alert('Por favor, selecione uma imagem primeiro.');
         return;
       }
 
+      if (!apiKey) {
+        alert('Por favor, insira uma chave de API da Groq válida.');
+        return;
+      }
+
       statusArea.className = 'status-badge status-none';
-      statusArea.innerText = 'Analisando imagem com IA...';
-      detail.innerText = 'A processar análise através do Puter.js...';
+      statusArea.innerText = 'Analisando imagem com Groq...';
+      detail.innerText = 'A enviar requisição para a API da Groq...';
+
+      const targetUrl = "https://api.groq.com/openai/v1/chat/completions";
+      const proxyUrl = "https://corsproxy.io/?" + encodeURIComponent(targetUrl);
 
       try {
         const promptTexto = "Analisa esta imagem/print com foco em violações de diretrizes de redes sociais (Kwai, TikTok, etc). Responde estritamente no formato:\nSTATUS: [VERMELHO ou VERDE]\nMOTIVO: [Explicação curta e direta]";
 
-        // Estrutura segura compatível com a API de chat multimodal do Puter.js
-        const resposta = await puter.ai.chat([
-          {
-            role: 'user',
-            content: [
-              { type: 'text', text: promptTexto },
-              { type: 'image_url', image_url: { url: imagemOtimizadaBase64 } }
-            ]
-          }
-        ]);
-        
-        const conteudo = typeof resposta === 'string' ? resposta : (resposta.message ? resposta.message.content : (resposta.text || JSON.stringify(resposta)));
+        const payload = {
+          model: "llama-3.2-11b-vision-preview",
+          messages: [
+            {
+              role: "user",
+              content: [
+                {
+                  type: "text",
+                  text: promptTexto
+                },
+                {
+                  type: "image_url",
+                  image_url: {
+                    url: imagemOtimizadaBase64
+                  }
+                }
+              ]
+            }
+          ],
+          max_tokens: 150
+        };
 
-        if (conteudo.toUpperCase().includes("VERMELHO")) {
+        let response = await fetch(proxyUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${apiKey}`
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          // Tenta chamada direta caso o proxy falhe
+          response = await fetch(targetUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${apiKey}`
+            },
+            body: JSON.stringify(payload)
+          });
+        }
+
+        const data = await response.json();
+
+        if (data.error) {
+          throw new Error(data.error.message || "Erro retornado pela API da Groq");
+        }
+
+        const respostaIA = data.choices[0].message.content;
+
+        if (respostaIA.toUpperCase().includes("VERMELHO")) {
           statusArea.className = 'status-badge status-red';
           statusArea.innerText = 'Status Vermelho: Violação Detectada';
         } else {
@@ -558,11 +608,11 @@
           statusArea.innerText = 'Status Verde: Conteúdo Regular';
         }
 
-        detail.innerText = conteudo;
+        detail.innerText = respostaIA;
       } catch (error) {
         statusArea.className = 'status-badge status-red';
         statusArea.innerText = 'Erro na Análise';
-        detail.innerText = 'Erro ao conectar ao Puter.js: ' + (error.message || error);
+        detail.innerText = 'Erro ao conectar à Groq: ' + error.message;
       }
     }
 
