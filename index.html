@@ -523,7 +523,7 @@
       reader.readAsDataURL(file);
     }
 
-    /* Chamada utilizando a API da Groq com suporte a Vision */
+    /* Chamada utilizando a API da Groq com o modelo atualizado */
     async function analisarComGroq() {
       const statusArea = document.getElementById('statusArea');
       const detail = document.getElementById('analysisDetail');
@@ -550,7 +550,7 @@
         const promptTexto = "Analisa esta imagem/print com foco em violações de diretrizes de redes sociais (Kwai, TikTok, etc). Responde estritamente no formato:\nSTATUS: [VERMELHO ou VERDE]\nMOTIVO: [Explicação curta e direta]";
 
         const payload = {
-          model: "llama-3.2-11b-vision-preview",
+          model: "llama-3.2-90b-vision-preview",
           messages: [
             {
               role: "user",
@@ -581,7 +581,6 @@
         });
 
         if (!response.ok) {
-          // Tenta chamada direta caso o proxy falhe
           response = await fetch(targetUrl, {
             method: "POST",
             headers: {
