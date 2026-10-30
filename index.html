@@ -219,6 +219,24 @@
           </span>
           <span>➔</span>
         </button>
+
+        <!-- NOVOS BOTÕES SOLICITADOS -->
+        <button class="menu-btn" onclick="abrirDenunciaEspecifica('Denúncia de PV', 'Solicito a análise urgente desta mensagem privada (PV) por violação grave das diretrizes da comunidade, assédio e termos de uso da plataforma.')">
+          <span>
+            <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+            Texto de Denúncia de PV
+          </span>
+          <span>➔</span>
+        </button>
+
+        <button class="menu-btn" onclick="abrirDenunciaEspecifica('Denúncia de Perfil', 'Solicito a suspensão imediata deste perfil por violação recorrente das diretrizes de segurança, uso de identidade falsa e conteúdo inadequado.')">
+          <span>
+            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            Texto de Denúncia de Perfil
+          </span>
+          <span>➔</span>
+        </button>
+
         <button class="menu-btn" onclick="mudarTela('screen-email-manual')">
           <span>
             <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
@@ -264,6 +282,25 @@
         </div>
         
         <div id="ticketsItemList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= TELA RÁPIDA PARA DENÚNCIAS ESPECÍFICAS (PV / PERFIL) ================= -->
+  <div id="screen-denuncia-especifica" class="screen">
+    <div class="card">
+      <button class="btn-voltar" onclick="mudarTela('screen-main')">⬅ Voltar ao Menu</button>
+      <h2 id="tituloDenunciaEspecifica">Denúncia</h2>
+      
+      <div class="form-group" style="margin-bottom: 15px;">
+        <label>ID da Pessoa Denunciada (Opcional):</label>
+        <input type="text" id="idAlvoEspecifico" placeholder="Ex: 987654321">
+      </div>
+
+      <div class="item-card">
+        <h3 id="subTituloDenuncia">Texto Pronto</h3>
+        <p id="textoDenunciaConteudo" style="word-break: break-word;"></p>
+        <button class="btn btn-secondary" onclick="copiarTextoEspecifico(this)">Copiar Texto para o Kwai</button>
       </div>
     </div>
   </div>
@@ -353,6 +390,7 @@
     let dadosTickets = { categorias: [] };
     let dadosEmails = { categorias: [] };
     let imagemOtimizadaBase64 = "";
+    let textoBaseAtual = "";
 
     const svgIconeCategoria = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:var(--silver);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>';
 
@@ -374,6 +412,32 @@
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById(screenId).classList.add('active');
       window.scrollTo(0, 0);
+    }
+
+    function abrirDenunciaEspecifica(titulo, texto) {
+      document.getElementById('tituloDenunciaEspecifica').innerText = titulo;
+      document.getElementById('subTituloDenuncia').innerText = "Mensagem padrão para " + titulo.toLowerCase();
+      document.getElementById('textoDenunciaConteudo').innerText = texto;
+      document.getElementById('idAlvoEspecifico').value = '';
+      textoBaseAtual = texto;
+      mudarTela('screen-denuncia-especifica');
+    }
+
+    function copiarTextoEspecifico(botao) {
+      const idAlvo = document.getElementById('idAlvoEspecifico').value.trim();
+      const textoFinal = idAlvo ? `${textoBaseAtual} ${idAlvo}` : textoBaseAtual;
+
+      navigator.clipboard.writeText(textoFinal).then(() => {
+        const originalText = botao.innerText;
+        botao.innerText = 'Copiado!';
+        botao.style.borderColor = 'var(--silver-light)';
+        botao.style.color = 'var(--silver-light)';
+        setTimeout(() => {
+          botao.innerText = originalText;
+          botao.style.borderColor = '';
+          botao.style.color = '';
+        }, 2000);
+      });
     }
 
     function renderizarMenuTickets() {
@@ -523,7 +587,7 @@
       reader.readAsDataURL(file);
     }
 
-    /* Chamada utilizando a API da Groq com suporte multimodal atualizado */
+    /* Chamada utilizando a API da Groq */
     async function analisarComGroq() {
       const statusArea = document.getElementById('statusArea');
       const detail = document.getElementById('analysisDetail');
