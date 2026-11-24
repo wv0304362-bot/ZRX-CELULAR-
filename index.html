@@ -157,8 +157,19 @@
       cursor: pointer;
       font-size: 0.9rem;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
     .btn:hover { border-color: var(--silver-light); background: rgba(55, 62, 75, 0.9); }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
 
     .btn-secondary {
       background: transparent;
@@ -194,6 +205,7 @@
     }
 
     .hidden { display: none; }
+    .counter { font-size: 0.75rem; color: var(--silver); margin-top: 3px; }
   </style>
 </head>
 <body>
@@ -237,7 +249,7 @@
 
         <button class="menu-btn" onclick="mudarTela('screen-email-manual')">
           <span>
-            <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
             E-mail Manual (Individual)
           </span>
           <span>➔</span>
@@ -311,7 +323,7 @@
     <div class="card">
       <button class="btn-voltar" onclick="mudarTela('screen-main')">⬅ Voltar ao Menu</button>
       <h2>
-        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
         Configurar E-mail Manual
       </h2>
       
@@ -335,7 +347,10 @@
         <label>Mensagem:</label>
         <textarea id="mensagemManual" placeholder="Texto preenchido..."></textarea>
       </div>
-      <button class="btn" onclick="enviarManual()">Enviar E-mail</button>
+      <button class="btn" onclick="enviarManual()">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        Enviar E-mail
+      </button>
     </div>
   </div>
 
@@ -460,7 +475,6 @@
       document.getElementById('ticketsCategoryList').classList.remove('hidden');
     }
 
-    /* Gestão da Tela Dinâmica para Denúncia de PV e Perfil */
     function abrirTelaDinamica(tipo) {
       const titulo = tipo === 'pv' ? 'Denúncia de PV (Mensagens)' : 'Denúncia de Perfil';
       const dados = tipo === 'pv' ? dadosPv : dadosPerfil;
@@ -492,7 +506,6 @@
       const itemContainer = document.getElementById('dinamicaItemList');
       itemContainer.innerHTML = '';
 
-      // Verifica se usa a estrutura de "textos" (array de strings) ou "itens" (objetos)
       if (cat.textos) {
         cat.textos.forEach((texto, index) => {
           const div = document.createElement('div');
@@ -632,7 +645,6 @@
       reader.readAsDataURL(file);
     }
 
-    /* Chamada utilizando a API da Groq */
     async function analisarComGroq() {
       const statusArea = document.getElementById('statusArea');
       const detail = document.getElementById('analysisDetail');
@@ -724,7 +736,28 @@
       }
     }
 
-    function enviarManual() { alert('Comando de envio manual acionado!'); }
+    function enviarManual() {
+      const para = document.getElementById('paraManual').value.trim();
+      const assunto = document.getElementById('assuntoManual').value.trim();
+      const idAlvo = document.getElementById('idAlvoManual').value.trim();
+      const meuId = document.getElementById('meuIdManual').value.trim();
+      let mensagem = document.getElementById('mensagemManual').value;
+
+      if (!para) {
+        alert('Preencha o campo "Para (E-mail destino)".');
+        return;
+      }
+
+      const extras = [];
+      if (idAlvo) extras.push(`ID Alvo: ${idAlvo}`);
+      if (meuId) extras.push(`Meu ID: ${meuId}`);
+      if (extras.length > 0) {
+        mensagem = `${mensagem}\n\n${extras.join(' | ')}`;
+      }
+
+      const mailtoLink = `mailto:${encodeURIComponent(para)}?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(mensagem)}`;
+      window.location.href = mailtoLink;
+    }
 
     window.onload = carregarDados;
   </script>
